@@ -14,12 +14,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
+Flask = "*"
+peewee = "*"
 typing_extensions = "*"
 
 [dev-packages]
 # IPython
 ipython = "*"
-flask-shell-ipython = "*"
 # Linting
 autopep8 = "*"
 bandit = "*"
