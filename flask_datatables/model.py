@@ -240,7 +240,7 @@ class Model(peewee.Model):
         length = query['length']
 
         data: List[Union[ArrayData, ObjectData]] = list()
-        for record in select_query.offset(start).limit(length).iterator():
+        for record in select_query.offset(start).limit(length).objects():
             if factory is not None:
                 row = factory(record)
             else:

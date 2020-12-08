@@ -8,7 +8,7 @@ with open('README.rst', 'r') as f:
 __version__ = '0.0.0.dev0'
 
 setup(
-    name='Flask-DT-peewee',
+    name='Flask-DataTables-peewee',
     version=__version__,
     description='Flask integration with DataTables and peewee.',
     long_description=long_description,
