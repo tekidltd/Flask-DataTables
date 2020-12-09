@@ -3,7 +3,18 @@
 """Utilities & Auxiliaries
 =============================
 
+We provided some auxiliary functions for ``Flask-DataTables``.
 
+* :func:`~flask_datatables.utils.render_macro` renders a given
+  ``macro`` from the Jinja templates
+* :func:`~flask_datatables.utils.prepare_response` is the default
+  built-in method for ``factory`` parameter of
+  :meth:`Model.search <flask_datatables.model.Model.search>`
+* :func:`~flask_datatables.utils.parse_request` is the utility
+  function to parse `DataTables`_ client-side query parameters
+  from the URL
+
+.. _DataTables: https://datatables.net/
 
 """
 

@@ -3,7 +3,6 @@
 from .app import DataTables
 from .fields import *  # pylint: disable=unused-wildcard-import
 
-
 __all__ = [
     'DataTables',
 

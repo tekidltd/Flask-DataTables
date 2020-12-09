@@ -115,6 +115,8 @@ class Model(peewee.Model):
         metaclass = self._meta
 
         for key, target in self.dt_orderable.items():
+            if key == target.name:
+                continue
             value = getattr(self, key)
             source = metaclass.fields[key]
             if hasattr(source, 'dt_order'):
@@ -122,6 +124,8 @@ class Model(peewee.Model):
             setattr(self, target.name, value)
 
         for key, target in self.dt_searchable.items():
+            if key == target.name:
+                continue
             value = getattr(self, key)
             source = metaclass.fields[key]
             if hasattr(source, 'dt_search'):

@@ -3,6 +3,15 @@
 """Data Fields
 =================
 
+We extends the field classes from :mod:`peewee` with two properties
+(:attr:`~flask_datatables.Field.dt_orderable` and
+:attr:`~flask_datatables.Field.dt_searchable`) and two conversion
+methods (:meth:`~flask_datatables.Field.dt_order` and
+:meth:`~flask_datatables.Field.dt_search`) for the integration with
+`DataTables`_ server-side processing.
+
+.. _DataTables: https://datatables.net/
+
 """
 
 import datetime
@@ -45,7 +54,48 @@ __all__ = [
 
 
 class Field(peewee.Field):
-    """Extending :class:`peewee.Field`."""
+    """Extending :class:`peewee.Field`.
+
+    Args:
+        orderable: Optional[Union[bool, peewee.Field]]: `DataTables`_ orderable field.
+        searchable: Optional[Union[bool, peewee.Field]]: `DataTables`_ searchable field.
+        **kwargs: Arbitrary arguments accepted by :class:`peewee.Field`.
+
+    If ``orderable`` and/or ``searchable`` is a :obj:`bool` value, it indicates if the
+    field supports `DataTables`_ ordering and/or searching:
+
+    * :data:`True` means the field is orderable and/or searchable, and it will refer to
+      its properties :attr:`~flask_datatables.fields.Field.dt_orderable` and/or
+      :attr:`~flask_datatables.fields.Field.dt_searchable` as its default field instance;
+
+      .. note::
+
+         If the property returns :data:`None`, then the field is orderable and/or searchable
+         by itself with its own values.
+
+    * :data:`False` disables ordering and searching on the field;
+    * an instance of :class:`peewee.Field` indicates that the current field is orderable
+      and/or searchable through the given field instance.
+
+    Important:
+        If ``orderable`` and/or ``searchable`` is an instance of :class:`peewee.Field`, then
+        its attributes :attr:`~flask_datatables.fields.Field.orderable` and/or
+        :attr:`~flask_datatables.fields.Field.searchable` will be the corresponding instance.
+
+        If ``orderable`` and/or ``searchable`` is :data:`True`, then it refers to its properties
+        :attr:`~flask_datatables.fields.Field.dt_orderable` and/or
+        :attr:`~flask_datatables.fields.Field.dt_searchable` as the actual value:
+
+        * if the properties return an instance of :class:`peewee.Field`, then the attributes will
+          be the returned instance; i.e. the field is orderable and/or searchable by converting to
+          the target field instead of itself;
+        * if the properties return :data:`None`, then the attributes will be :data:`True`; i.e.
+          the field is orderable and/or searchable by itself with its value.
+
+        If ``orderable`` and/or ``searchable`` is :data:`False`, then the attributes will be
+        :data:`False` as well.
+
+    """
 
     @property
     def dt_orderable(self) -> Optional[peewee.Field]:
