@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from .app import DataTables
+from .database import Database
 from .fields import *  # pylint: disable=unused-wildcard-import
 
 __all__ = [
-    'DataTables',
+    'Database',
 
     'AutoField',
     'BareField',
