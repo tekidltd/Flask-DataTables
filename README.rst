@@ -8,7 +8,7 @@ scripts with the server-side processing based on ``Flask`` and ``peewee``.
 Installation
 ------------
 
-.. note::
+   **Note**
 
    As we have noticed, there's already a ``Flask-DataTables`` library available
    on `PyPI`_. However, this package was intended for integration with ``SQLAlchemy``
@@ -69,14 +69,14 @@ we can have a `DataTables`_ integrated data model just as below:
        class Meta(Metadata):
            datatables = True
 
-And now, you may simply call :meth:`Tweet.search <flask_datatables.model.Model.search>`
-to perform the server-side processing queries.
+And now, you may simply call ``Tweet.search()`` to perform the server-side
+processing queries.
 
-.. seealso::
+   **See Also**
 
    It is also possible to customise the orderable and/or searchable
-   fields through :class:`~flask_datatables.fields.Field` parameters,
+   fields through ``flask_datatables.fields.Field`` parameters,
    and their corresponding behaviours by subclassing the
-   :class:`~flask_datatables.fields.Field` classes.
+   ``flask_datatables.fields.Field`` classes.
 
 .. _DataTables: https://datatables.net/

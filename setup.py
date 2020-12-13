@@ -1,27 +1,39 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=all
+# type: ignore
 
 from setuptools import setup
 
 with open('README.rst', 'r') as f:
     long_description = f.read()
 
-__version__ = '0.0.0.dev0'
+__version__ = '0.1.0'
 
-setup(
+# setup attributes
+attrs = dict(
     name='Flask-DataTables-peewee',
     version=__version__,
     description='Flask integration with DataTables and peewee.',
     long_description=long_description,
-    long_description_content_type='text/x-rst',
-    url='https://github.com/JarryShaw/Flask-DataTables',
     author='Jarry Shaw',
     author_email='jarryshaw@icloud.com',
-    license='BSD License',
+    maintainer='Jarry Shaw',
+    maintainer_email='jarryshaw@icloud.com',
+    url='https://github.com/JarryShaw/Flask-DataTables',
+    download_url='https://github.com/JarryShaw/Flask-DataTables/archive/v%s.tar.gz' % __version__,
+    # py_modules
+    packages=[
+        'flask_datatables',
+    ],
+    # scripts
+    # ext_modules
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
+        'Natural Language :: English',
         'Operating System :: OS Independent',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -31,14 +43,78 @@ setup(
         'Topic :: Utilities',
         'Typing :: Typed',
     ],
-    keywords='bpc backport utilities',
-    packages=['flask_datatables'],
-    package_data={'flask_datatables': ['py.typed']},
-    python_requires='>=3.6',
+    # distclass
+    # script_name
+    # script_args
+    # options
+    license='BSD 3-Clause License',
+    keywords=[
+        'flask',
+        'peewee',
+        'datatables',
+    ],
+    platforms=[
+        'any',
+    ],
+    # cmdclass
+    # data_files
+    # package_dir
+    # obsoletes
+    # provides
+    # requires
+    # command_packages
+    # command_options
+    package_data={
+        '': [
+            'LICENSE',
+            'README.md',
+        ],
+        'flask_datatables': [
+            'py.typed',
+        ],
+    },
+    # include_package_data
+    # libraries
+    # headers
+    # ext_package
+    # include_dirs
+    # password
+    # fullname
+    # long_description_content_type
+    # python_requires
+    # zip_safe,
     install_requires=[
         'Flask',
         'peewee',
-        'typing;python_version<"3.5"',
+
+        'typing; python_version<"3.5"',
         'typing_extensions',
     ],
+    #entry_points
+    #extras_require
+    #setup_requires
 )
+
+try:
+    from setuptools import setup
+    from setuptools.command.build_py import build_py
+
+    attrs.update(dict(
+        include_package_data=True,
+        # libraries
+        # headers
+        # ext_package
+        # include_dirs
+        # password
+        # fullname
+        long_description_content_type='text/x-rst',
+        python_requires='>=3.6',
+        # zip_safe=True,
+    ))
+except ImportError:
+    from distutils.core import setup
+    from distutils.command.build_py import build_py
+
+
+# set-up script for pip distribution
+setup(**attrs)

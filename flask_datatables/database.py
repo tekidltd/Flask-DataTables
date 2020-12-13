@@ -60,19 +60,3 @@ class DataTable(playhouse.flask_utils.FlaskDB):
         """
         super().init_app(app)
         app.extensions['datatables'] = self
-
-    def connect_db(self) -> None:  # pylint: disable=useless-return
-        """Connect to database before handling request.
-
-        We monkeypatched the original :meth:`playhouse.flask_utils.FlaskDB.connect_db`
-        to make sure that it shall never fail in case of :exc:`peewee.OperationalError`
-        and/or :exc:`peewee.InterfaceError` being raised.
-
-        """
-        while True:
-            try:
-                super().connect_db()
-            except (peewee.OperationalError, peewee.InterfaceError):
-                continue
-            break
-        return None
