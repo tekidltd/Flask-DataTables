@@ -19,7 +19,8 @@ We provided some auxiliary functions for ``Flask-DataTables``.
 """
 
 import contextlib
-from typing import Any, Callable, Dict, List, Optional, Union
+import urllib.parse
+from typing import Callable, List, Optional, Union
 
 import flask
 import peewee
@@ -35,7 +36,7 @@ __all__ = [
 ]
 
 
-def render_macro(template_name_or_list: Union[str, List[str]], macro: str, **context: Dict[str, Any]) -> str:
+def render_macro(template_name_or_list: Union[str, List[str]], macro: str, **context) -> str:  # type: ignore[no-untyped-def]
     """Evaluates and renders a **macro** from the template.
 
     Args:
@@ -133,16 +134,20 @@ def _parse_str(arg: Optional[str]) -> str:
     return arg
 
 
-def parse_request(args: werkzeug.datastructures.ImmutableMultiDict) -> Query:
+def parse_request(args: Optional[werkzeug.datastructures.ImmutableMultiDict] = None) -> Query:
     """Parse :attr:`flask.request.args <flask.Request.args>` as :class:`~tekid.ext.datatables.Query`.
 
     Args:
-        args: Original request arguments.
+        args: Original request arguments. The default value is inferred from
+            :attr:`request.args <flask.Request.args>`.
 
     Returns:
         Parsed query dictionary.
 
     """
+    if args is None:
+        args = flask.request.args
+
     query: Query = {
         'draw': _parse_int(args.get('draw')),
         'columns': [],
@@ -189,3 +194,27 @@ def parse_request(args: werkzeug.datastructures.ImmutableMultiDict) -> Query:
         index += 1
 
     return query
+
+
+def build_cache(query_string: Optional[str] = None) -> str:
+    """Build a key to cache the query parameters.
+
+    Args:
+        query_string: Query parameters in string form. The default value is inferred
+            from :attr:`request.query_string <flask.Request.query_string>`.
+
+    Returns:
+        A string literal representing the query parameters.
+
+    """
+    if query_string is None:
+        query_string = flask.request.query_string.decode()
+
+    query_parsed = urllib.parse.parse_qsl(query_string)
+    query = werkzeug.datastructures.MultiDict(query_parsed).to_dict()
+
+    if 'draw' in  query:
+        del query['draw']
+
+    query_sorted = sorted(query.items(), key=lambda kv: kv[0])
+    return urllib.parse.urlencode(query_sorted)

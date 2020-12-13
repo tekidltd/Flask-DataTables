@@ -19,6 +19,7 @@ peewee = "*"
 typing_extensions = "*"
 
 [dev-packages]
+flask_datatables = {path = ".",editable = true}
 # IPython
 ipython = "*"
 # Linting

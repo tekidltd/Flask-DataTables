@@ -4,6 +4,9 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+# type: ignore
+# pylint: disable=all
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -31,7 +34,52 @@ release = '0.0.0.dev0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.autodoc', 'sphinx.ext.autodoc.typehints',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.todo',
+    'sphinx_autodoc_typehints',
 ]
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+
+    'flask': ('https://flask.palletsprojects.com/en/1.1.x/', None),
+    'peewee': ('http://docs.peewee-orm.com/en/latest/', None),
+}
+
+autodoc_default_options = {
+    # 'members': True,
+    'member-order': 'groupwise',
+    # 'special-members': '__init__',
+    'undoc-members': False,
+    'exclude-members': '__weakref__, _abc_impl, _unbound_fields, _wtforms_meta, _meta, _schema',
+    'ignore-module-all': False,
+    'private-members': False,
+}
+autodoc_typehints = 'description'
+# autodoc_member_order = 'bysource'
+# autodoc_member_order = 'alphabetic'
+
+# Napoleon settings
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = True
+napoleon_include_private_with_doc = True
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = True
+napoleon_use_admonition_for_notes = True
+napoleon_use_admonition_for_references = True
+napoleon_use_ivar = True
+napoleon_use_param = True
+napoleon_use_rtype = True
+napoleon_use_keyword = True
+napoleon_custom_sections = None
+
+manpages_url = 'https://linux.die.net/man/{section}/{page}'
+
+do_include_todos = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -53,3 +101,40 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+html_theme_options = {
+    'show_powered_by': False,
+    'github_user': 'JarryShaw',
+    'github_repo': 'Flask-DataTables',
+    'github_banner': True,
+    'github_type': 'star',
+    #'show_related': False,
+    #'note_bg': '#FFF59C',
+    #'travis_button': True,
+    #'codecov_button': True,
+}
+
+
+# -- Customised hooks --------------------------------------------------------
+
+
+def maybe_skip_member(app, what: str, name: str, obj: object, skip: bool, options: dict):
+    if name == '_abc_impl':
+        return True
+    if name == '__init__':
+        if '__create_fn__' in obj.__qualname__:
+            return True
+    return skip
+
+
+def remove_module_docstring(app, what: str, name: str, obj: object, options: dict, lines: list):
+    if what == "module" and "flask_datatables" in name:
+        lines.clear()
+
+
+def setup(app):
+    #app.connect("autodoc-process-docstring", remove_module_docstring)
+    app.connect('autodoc-skip-member', maybe_skip_member)

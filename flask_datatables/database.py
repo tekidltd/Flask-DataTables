@@ -10,7 +10,6 @@ in order to better support the integration with :mod:`Flask`.
 
 """
 
-import contextlib
 from typing import Any, Dict, Optional, Union
 
 import flask
@@ -19,13 +18,13 @@ import playhouse.flask_utils
 
 from .model import Model
 
-__all__ = ['Database']
+__all__ = ['DataTable']
 
 # ``database`` parameter acceptable types
 DBConfig = Union[Dict[str, Any], str, peewee.Database]
 
 
-class Database(playhouse.flask_utils.FlaskDB):
+class DataTable(playhouse.flask_utils.FlaskDB):
     """Server-side processing integration with `DataTables`_.
 
     Args:
@@ -62,13 +61,18 @@ class Database(playhouse.flask_utils.FlaskDB):
         super().init_app(app)
         app.extensions['datatables'] = self
 
-    def connect_db(self) -> None:
+    def connect_db(self) -> None:  # pylint: disable=useless-return
         """Connect to database before handling request.
 
         We monkeypatched the original :meth:`playhouse.flask_utils.FlaskDB.connect_db`
         to make sure that it shall never fail in case of :exc:`peewee.OperationalError`
-        and :exc:`peewee.InterfaceError` being raised.
+        and/or :exc:`peewee.InterfaceError` being raised.
 
         """
-        with contextlib.suppress(peewee.OperationalError, peewee.InterfaceError):
-            return super().connect_db()
+        while True:
+            try:
+                super().connect_db()
+            except (peewee.OperationalError, peewee.InterfaceError):
+                continue
+            break
+        return None

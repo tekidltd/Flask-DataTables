@@ -16,3 +16,6 @@ indent_style = tab
 
 [*.[Bb][Aa][Tt]]
 end_of_line = crlf
+
+[*.rst]
+indent_size = 3

@@ -1,9 +1,14 @@
-.PHONY: dist
+.PHONY: dist docs
 
 export PIPENV_VERBOSITY = -1
 
-isort:
-	pipenv run isort -l100 --color flask_datatables
+format ?= html
+
+docs: docs-build
+
+dist: dist-build
+	twine check dist/*
+	twine upload --skip-existing dist/*
 
 dist-clean:
 	[ -f dist/*.whl ] && mkdir -p wheels && mv dist/*.whl wheels || true
@@ -13,6 +18,11 @@ dist-clean:
 dist-build: dist-clean
 	pipenv run python setup.py sdist bdist_wheel
 
-dist:
-	twine check dist/*
-	twine upload --skip-existing dist/*
+docs-build:
+	pipenv run $(MAKE) -C docs ${format}
+
+docs-api:
+	pipenv run sphinx-apidoc -e -P -M --no-headings -o docs/source flask_datatables
+
+isort:
+	pipenv run isort -l100 --color flask_datatabless

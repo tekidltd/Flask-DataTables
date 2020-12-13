@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from .database import Database
+from .database import DataTable
+from .model import Model, Metadata
 from .fields import *  # pylint: disable=unused-wildcard-import
 
 __all__ = [
-    'Database',
+    'DataTable',
+
+    'Model',
+    'Metadata',
 
     'AutoField',
     'BareField',

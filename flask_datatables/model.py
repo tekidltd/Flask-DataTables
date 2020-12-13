@@ -68,7 +68,7 @@ class Model(peewee.Model):
         When the :attr:`~flask_datatables.fields.Field.orderable` and/or
         :attr:`~flask_datatables.fields.Field.searchable` attributes are set to
         an instance of a :class:`~peewee.Field`, ``Flask-DataTables`` will insert
-        additional fields of such type with ``_dt_order`` and/or ``dt_search``
+        additional fields of such type with ``_dt_order`` and/or ``_dt_search``
         suffix as the field names accordingly.
 
         """

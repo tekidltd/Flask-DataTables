@@ -4,11 +4,11 @@
 =================
 
 We extends the field classes from :mod:`peewee` with two properties
-(:attr:`~flask_datatables.Field.dt_orderable` and
-:attr:`~flask_datatables.Field.dt_searchable`) and two conversion
-methods (:meth:`~flask_datatables.Field.dt_order` and
-:meth:`~flask_datatables.Field.dt_search`) for the integration with
-`DataTables`_ server-side processing.
+(:attr:`~flask_datatables.fields.Field.dt_orderable` and
+:attr:`~flask_datatables.fields.Field.dt_searchable`) and two
+conversion methods (:meth:`~flask_datatables.fields.Field.dt_order`
+and :meth:`~flask_datatables.fields.Field.dt_search`) for the integration
+with `DataTables`_ server-side processing.
 
 .. _DataTables: https://datatables.net/
 
@@ -22,6 +22,8 @@ from typing import Any, Optional, Union
 import peewee
 
 __all__ = [
+    'Field',
+
     'AutoField',
     'BareField',
     'BigAutoField',
@@ -36,7 +38,6 @@ __all__ = [
     'DateTimeField',
     'DecimalField',
     'DoubleField',
-    'Field',
     'FixedCharField',
     'FloatField',
     'ForeignKeyField',
