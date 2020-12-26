@@ -31,7 +31,7 @@ pylint = "*"
 # Sphinx documentations
 Sphinx = "*"
 sphinx-autodoc-typehints = "*"
-snooty = "*"
+snooty-lextudio = "*"
 rstcheck = "*"
 
 [requires]
