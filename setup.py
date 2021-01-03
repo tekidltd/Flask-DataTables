@@ -7,7 +7,7 @@ from setuptools import setup
 with open('README.rst', 'r') as f:
     long_description = f.read()
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 # setup attributes
 attrs = dict(

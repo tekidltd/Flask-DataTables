@@ -20,14 +20,21 @@ We provided some auxiliary functions for ``Flask-DataTables``.
 
 import contextlib
 import urllib.parse
-from typing import Callable, List, Optional, Union
+from typing import TYPE_CHECKING, cast
 
 import flask
 import peewee
 import werkzeug.datastructures
 import werkzeug.exceptions
 
-from .typing import ObjectData, Query
+if TYPE_CHECKING:
+    from typing import Any, Callable, List, Optional, Union
+
+    from jinja2 import Environment
+    from peewee import Model
+    from werkzeug.datastructures import ImmutableMultiDict
+
+    from .typing import ObjectData, Query
 
 __all__ = [
     'render_macro',
@@ -36,7 +43,7 @@ __all__ = [
 ]
 
 
-def render_macro(template_name_or_list: Union[str, List[str]], macro: str, **context) -> str:  # type: ignore[no-untyped-def]
+def render_macro(template_name_or_list: 'Union[str, List[str]]', macro: str, **context: 'Any') -> str:
     """Evaluates and renders a **macro** from the template.
 
     Args:
@@ -51,12 +58,12 @@ def render_macro(template_name_or_list: Union[str, List[str]], macro: str, **con
         The rendered macro.
 
     """
-    template = flask.current_app.jinja_env.get_or_select_template(template_name_or_list)  # pylint: disable=no-member
+    template = cast('Environment', flask.current_app.jinja_env).get_or_select_template(template_name_or_list)  # type: ignore[arg-type] # pylint: disable=line-too-long
     macro_func = getattr(template.module, macro)
     return macro_func(**context)
 
 
-def prepare_response(template: Union[str, List[str]]) -> Callable[[peewee.Model], ObjectData]:
+def prepare_response(template: 'Union[str, List[str]]') -> 'Callable[[Model], ObjectData]':
     """Prepare response object data.
 
     The function returns a wrapper function to use the ``template`` as a factory to
@@ -74,18 +81,18 @@ def prepare_response(template: Union[str, List[str]]) -> Callable[[peewee.Model]
         See :func:`flask_datatables.utils.render_macro` for more information.
 
     """
-    def wrapper(record: peewee.Model) -> ObjectData:
-        data = dict()
+    def wrapper(record: peewee.Model) -> 'ObjectData':
+        data = {}  # type: ObjectData
         for field in record.__data__.keys():
             try:
-                data[field] = render_macro(template, f'render_{field}', record=record)
+                data[field] = render_macro(template, f'render_{field}', record=record)  # type: ignore[misc]
             except Exception:
-                data[field] = getattr(record, field)
-        return data  # type: ignore[return-value]
+                data[field] = getattr(record, field)  # type: ignore[misc]
+        return data
     return wrapper
 
 
-def _parse_int(arg: Optional[str]) -> int:
+def _parse_int(arg: 'Optional[str]') -> int:
     """Parse argument as :obj:`int`.
 
     Args:
@@ -95,12 +102,13 @@ def _parse_int(arg: Optional[str]) -> int:
         Parsed query argument.
 
     """
-    with contextlib.suppress(Exception):
-        return int(arg)  # type: ignore[arg-type]
+    if arg is not None:
+        with contextlib.suppress(Exception):
+            return int(arg)
     return -1
 
 
-def _parse_bool(arg: Optional[str]) -> bool:
+def _parse_bool(arg: 'Optional[str]') -> bool:
     """Parse argument as :obj:`bool`.
 
     Args:
@@ -119,7 +127,7 @@ def _parse_bool(arg: Optional[str]) -> bool:
     return False
 
 
-def _parse_str(arg: Optional[str]) -> str:
+def _parse_str(arg: 'Optional[str]') -> str:
     """Parse argument as :obj:`str`.
 
     Args:
@@ -134,7 +142,7 @@ def _parse_str(arg: Optional[str]) -> str:
     return arg
 
 
-def parse_request(args: Optional[werkzeug.datastructures.ImmutableMultiDict] = None) -> Query:
+def parse_request(args: 'Optional[ImmutableMultiDict]' = None) -> 'Query':
     """Parse :attr:`flask.request.args <flask.Request.args>` as :class:`~tekid.ext.datatables.Query`.
 
     Args:
@@ -148,7 +156,7 @@ def parse_request(args: Optional[werkzeug.datastructures.ImmutableMultiDict] = N
     if args is None:
         args = flask.request.args
 
-    query: Query = {
+    query = {
         'draw': _parse_int(args.get('draw')),
         'columns': [],
         'order': [],
@@ -159,7 +167,7 @@ def parse_request(args: Optional[werkzeug.datastructures.ImmutableMultiDict] = N
             'regex': _parse_bool(args.get('search[regex]')),
         },
         '_': _parse_int(args.get('_')),
-    }
+    }  # type: Query
 
     index = 0
     while True:
@@ -196,7 +204,7 @@ def parse_request(args: Optional[werkzeug.datastructures.ImmutableMultiDict] = N
     return query
 
 
-def build_cache(query_string: Optional[str] = None) -> str:
+def build_cache(query_string: 'Optional[str]' = None) -> str:
     """Build a key to cache the query parameters.
 
     Args:

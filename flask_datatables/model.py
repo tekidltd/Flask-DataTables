@@ -14,21 +14,30 @@ correctly implemented.
 
 import functools
 import traceback
-from typing import Callable, Dict, List, Optional, Union
+from typing import TYPE_CHECKING
 
 import flask
-import peewee
+from peewee import Field
+from peewee import Metadata as _Metadata
+from peewee import Model as _Model
 
-from .typing import ArrayData, ObjectData, Query, Response
 from .utils import parse_request
+
+if TYPE_CHECKING:
+    from typing import Callable, Dict, List, Optional, Union
+
+    from peewee import AutoField, Expression, ModelSelect, Ordering
+
+    from .fields import Field
+    from .typing import ArrayData, ObjectData, Query, Response
+
+    # factory function to convert records
+    Factory = Callable[['Model'], Union[ArrayData, ObjectData]]
 
 __all__ = ['Model', 'Metadata']
 
-# factory function to convert records
-Factory = Callable[[peewee.Model], Union[ArrayData, ObjectData]]
 
-
-class Metadata(peewee.Metadata):
+class Metadata(_Metadata):
     """Basic metadata for data models.
 
     ``Flask-DataTables`` extends the original metadata record from :mod:`peewee`
@@ -42,17 +51,17 @@ class Metadata(peewee.Metadata):
     datatables: bool = False
 
 
-class Model(peewee.Model):
+class Model(_Model):
     """Extends :class:`peewee.Model` with `DataTables`_ support."""
 
-    id: peewee.AutoField
-    _meta: Metadata
+    id: 'AutoField'
+    _meta: 'Metadata'
 
     #: `DataTables`_ orderable fields.
-    dt_orderable: Dict[str, peewee.Field]
+    dt_orderable: 'Dict[str, Field]'
 
     #: `DataTables`_ searchable fields.
-    dt_searchable: Dict[str, peewee.Field]
+    dt_searchable: 'Dict[str, Field]'
 
     @classmethod
     def validate_model(cls) -> None:
@@ -72,8 +81,8 @@ class Model(peewee.Model):
         suffix as the field names accordingly.
 
         """
-        cls.dt_orderable = dict()
-        cls.dt_searchable = dict()
+        cls.dt_orderable = {}
+        cls.dt_searchable = {}
 
         metaclass = cls._meta
         if getattr(metaclass, 'datatables', False):
@@ -81,7 +90,7 @@ class Model(peewee.Model):
                 orderable = getattr(value, 'orderable', True)
                 if orderable:
                     target = value
-                    if isinstance(orderable, peewee.Field):
+                    if isinstance(orderable, Field):
                         metaclass.add_field(f'{key}_dt_order', orderable)
                         target = metaclass.fields[f'{key}_dt_order']
                         setattr(cls, f'{key}_dt_order', target)
@@ -90,7 +99,7 @@ class Model(peewee.Model):
                 searchable = getattr(value, 'searchable', True)
                 if searchable:
                     target = value
-                    if isinstance(searchable, peewee.Field):
+                    if isinstance(searchable, Field):
                         metaclass.add_field(f'{key}_dt_search', searchable)
                         target = metaclass.fields[f'{key}_dt_search']
                         setattr(cls, f'{key}_dt_order', target)
@@ -98,7 +107,7 @@ class Model(peewee.Model):
 
         return super().validate_model()
 
-    def save(self, force_insert: bool = False, only: Optional[List[peewee.Field]] = None) -> int:
+    def save(self, force_insert: bool = False, only: 'Optional[List[Field]]' = None) -> int:
         """Save the data in the model instance.
 
         The method extends the original :meth:`peewee.Model.save` method by automatically
@@ -135,8 +144,8 @@ class Model(peewee.Model):
         return super().save(force_insert, only)
 
     @classmethod
-    def search(cls: peewee.Model, query: Optional[Query] = None,
-               factory: Optional[Factory] = None) -> Response:
+    def search(cls, query: 'Optional[Query]' = None,
+               factory: 'Optional[Factory]' = None) -> 'Response':
         """Server-side processing integration with `DataTables`_.
 
         Args:
@@ -156,7 +165,7 @@ class Model(peewee.Model):
         """
         if query is None:
             query = parse_request(flask.request.args)
-        errors: List[BaseException] = list()
+        errors = []  # type: List[BaseException]
 
         try:
             draw = int(query['draw'])
@@ -168,13 +177,13 @@ class Model(peewee.Model):
         global_search_value = global_search_info['value']
         global_search_regex = global_search_info['regex']
 
-        field_list: List[peewee.Field] = []
-        extra_field_list: List[peewee.Field] = [cls.id]
-        where_query_list: List[peewee.Expression] = list()
+        field_list = []  # type: List[Field]
+        extra_field_list = [cls.id]  # type: List[Field]
+        where_query_list = []  # type: List[Expression]
         for column in query['columns']:
             field_name = column['data']
             try:
-                source_field: peewee.Field = cls._meta.fields[field_name]
+                source_field = cls._meta.fields[field_name]  # type: Field
             except KeyError as error:
                 errors.append(error)
                 continue
@@ -184,7 +193,7 @@ class Model(peewee.Model):
                 continue
 
             try:
-                field = cls._meta.fields[f'{source_field.name}_dt_search']
+                field = cls._meta.fields[f'{source_field.name}_dt_search']  # type: Field
                 extra_field_list.append(field)
             except KeyError:
                 field = source_field
@@ -207,7 +216,7 @@ class Model(peewee.Model):
                 where_query = field.contains(search_value)
             where_query_list.append(where_query)
 
-        order_by_list: List[peewee.Ordering] = list()
+        order_by_list = []  # type: List[Ordering]
         for order_info in query['order']:
             try:
                 column_index = int(order_info['column'])
@@ -230,20 +239,20 @@ class Model(peewee.Model):
             else:
                 errors.append(ValueError(f'unknown ordering direction: {order_dir}'))
 
-        select_query: peewee.ModelSelect = cls.select(*field_list, *extra_field_list)
+        select_query = cls.select(*field_list, *extra_field_list)  # type: ModelSelect
         if where_query_list:
             select_query = select_query.where(functools.reduce(
                 lambda p0, p1: p0 | p1, where_query_list,
             ))
         select_query = select_query.order_by(*order_by_list)
 
-        records_total = cls.select().count()
+        records_total = cls.select().count()  # pylint: disable=no-value-for-parameter
         records_filtered = select_query.count()
 
         start = query['start']
         length = query['length']
 
-        data: List[Union[ArrayData, ObjectData]] = list()
+        data = []  # type: List[Union[ArrayData, ObjectData]]
         for record in select_query.offset(start).limit(length).objects():
             if factory is not None:
                 row = factory(record)
@@ -258,10 +267,10 @@ class Model(peewee.Model):
                 error_msg += '-' * 80 + '\n'
                 error_msg += ''.join(traceback.format_exception(type(exc), exc, exc.__traceback__))
 
-        return dict(
-            draw=draw,
-            recordsTotal=records_total,
-            recordsFiltered=records_filtered,
-            data=data,
-            error=error_msg,
-        )
+        return {
+            'draw': draw,
+            'recordsTotal': records_total,
+            'recordsFiltered': records_filtered,
+            'data': data,
+            'error': error_msg,
+        }

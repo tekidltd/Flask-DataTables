@@ -25,4 +25,4 @@ docs-api:
 	pipenv run sphinx-apidoc -e -P -M --no-headings -o docs/source flask_datatables
 
 isort:
-	pipenv run isort -l100 --color flask_datatabless
+	pipenv run isort -l100 --color flask_datatables

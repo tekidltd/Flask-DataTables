@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from .database import DataTable
-from .model import Model, Metadata
 from .fields import *  # pylint: disable=unused-wildcard-import
+from .model import Metadata, Model
 
 __all__ = [
     'DataTable',

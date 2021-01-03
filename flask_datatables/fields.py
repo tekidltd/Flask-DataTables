@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=unsubscriptable-object
+# pylint: disable=unsubscriptable-object,ungrouped-imports
 """Data Fields
 =================
 
@@ -14,12 +14,17 @@ with `DataTables`_ server-side processing.
 
 """
 
-import datetime
-import decimal
-import uuid
-from typing import Any, Optional, Union
+from typing import TYPE_CHECKING
 
 import peewee
+
+if TYPE_CHECKING:
+    from datetime import date, datetime, time
+    from decimal import Decimal
+    from typing import Any, Iterable, List, Optional, Tuple, Union
+    from uuid import UUID
+
+    from peewee import SQL
 
 __all__ = [
     'Field',
@@ -99,19 +104,19 @@ class Field(peewee.Field):
     """
 
     @property
-    def dt_orderable(self) -> Optional[peewee.Field]:
+    def dt_orderable(self) -> 'Optional[Field]':
         """`DataTables`_ default orderable field."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
 
-    def __init__(self, orderable=None, searchable=None,  # type: ignore
-                 null=False, index=False, unique=False, column_name=None,
-                 default=None, primary_key=False, constraints=None,
-                 sequence=None, collation=None, unindexed=False, choices=None,
-                 help_text=None, verbose_name=None, index_type=None,
-                 db_column=None, _hidden=False):
+    def __init__(self, orderable: 'Optional[Union[bool, Field]]' = None, searchable: 'Optional[Union[bool, Field]]' = None,  # pylint: disable=line-too-long
+                 null: bool = False, index: bool = False, unique: bool = False, column_name: 'Optional[str]' = None,
+                 default: 'Any' = None, primary_key: bool = False, constraints: 'Optional[List[SQL]]' = None,
+                 sequence: 'Optional[str]' = None, collation: 'Optional[str]' = None, unindexed: bool = False, choices: 'Optional[Iterable[Tuple[str, Any]]]' = None,  # pylint: disable=line-too-long
+                 help_text: 'Optional[str]' = None, verbose_name: 'Optional[str]' = None, index_type: 'Optional[str]' = None,  # pylint: disable=line-too-long
+                 db_column: 'Optional[str]' = None, _hidden: bool = False) -> None:
         super().__init__(null=null, index=index, unique=unique, column_name=column_name,
                          default=default, primary_key=primary_key, constraints=constraints,
                          sequence=sequence, collation=collation, unindexed=unindexed, choices=choices,
@@ -124,12 +129,12 @@ class Field(peewee.Field):
             searchable = self.dt_searchable or True
 
         #: `DataTables`_ integration orderable flag.
-        self.orderable: Union[bool, peewee.Field] = orderable
+        self.orderable = orderable  # type: Union[bool, Field]
         #: `DataTables`_ integration searchable flag.
-        self.searchable: Union[bool, peewee.Field] = searchable
+        self.searchable = searchable  # type: Union[bool, Field]
 
     @staticmethod
-    def dt_order(value: Any) -> Any:
+    def dt_order(value: 'Any') -> 'Any':
         """Convert value for `DataTables`_ ordering operation.
 
         Args:
@@ -142,7 +147,7 @@ class Field(peewee.Field):
         return value
 
     @staticmethod
-    def dt_search(value: Any) -> Any:
+    def dt_search(value: 'Any') -> 'Any':
         """Convert value for `DataTables`_ searching operation.
 
         Args:
@@ -159,9 +164,9 @@ class IntegerField(peewee.IntegerField, Field):
     """Extending :class:`peewee.IntegerField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
-        return peewee.TextField(null=True)
+        return TextField(null=True)
 
     @staticmethod
     def dt_search(value: int) -> str:
@@ -205,7 +210,7 @@ class FloatField(peewee.FloatField, Field):
     """Extending :class:`peewee.FloatField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
         return peewee.TextField(null=True)
 
@@ -231,12 +236,12 @@ class DecimalField(peewee.DecimalField, Field):
     """Extending :class:`peewee.DecimalField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
         return peewee.TextField(null=True)
 
     @staticmethod
-    def dt_search(value: decimal.Decimal) -> str:
+    def dt_search(value: 'Decimal') -> str:
         """Convert value for `DataTables`_ searching operation.
 
         Args:
@@ -281,12 +286,12 @@ class UUIDField(peewee.UUIDField, Field):
     """Extending :class:`peewee.UUIDField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
         return peewee.CharField(max_length=40, null=True)
 
     @staticmethod
-    def dt_search(value: uuid.UUID) -> str:
+    def dt_search(value: 'UUID') -> str:
         """Convert value for `DataTables`_ searching operation.
 
         Args:
@@ -303,12 +308,12 @@ class BinaryUUIDField(peewee.BinaryUUIDField, Field):
     """Extending :class:`peewee.BinaryUUIDField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
         return peewee.CharField(max_length=16, null=True)
 
     @staticmethod
-    def dt_search(value: uuid.UUID) -> str:
+    def dt_search(value: 'UUID') -> str:
         """Convert value for `DataTables`_ searching operation.
 
         Args:
@@ -325,12 +330,12 @@ class _BaseFormattedField(peewee._BaseFormattedField, Field):  # pylint: disable
     """Extending :class:`peewee._BaseFormattedField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
         return peewee.TextField(null=True)
 
     @staticmethod
-    def dt_search(value: Union[datetime.datetime, datetime.date, datetime.time]) -> str:
+    def dt_search(value: 'Union[datetime, date, time]') -> str:
         """Convert value for `DataTables`_ searching operation.
 
         Args:
@@ -359,7 +364,7 @@ class TimestampField(peewee.TimestampField, BigIntegerField):
     """Extending :class:`peewee.TimestampField`."""
 
     @staticmethod
-    def dt_search(value: datetime.datetime) -> str:  # type: ignore[override]
+    def dt_search(value: 'datetime') -> str:  # type: ignore[override]
         """Convert value for `DataTables`_ searching operation.
 
         Args:
@@ -393,7 +398,7 @@ class BooleanField(peewee.BooleanField, Field):
     """Extending :class:`peewee.BooleanField`."""
 
     @property
-    def dt_searchable(self) -> Optional[peewee.Field]:
+    def dt_searchable(self) -> 'Optional[Field]':
         """`DataTables`_ default searchable field."""
         return peewee.CharField(max_length=5, null=True)
 

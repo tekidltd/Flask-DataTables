@@ -10,18 +10,22 @@ in order to better support the integration with :mod:`Flask`.
 
 """
 
-from typing import Any, Dict, Optional, Union
+from typing import TYPE_CHECKING
 
-import flask
-import peewee
 import playhouse.flask_utils
 
 from .model import Model
 
-__all__ = ['DataTable']
+if TYPE_CHECKING:
+    from typing import Any, Dict, Optional, Type, Union
 
-# ``database`` parameter acceptable types
-DBConfig = Union[Dict[str, Any], str, peewee.Database]
+    from flask import Flask
+    from playhouse.flask_utils import FlaskDB as Database
+
+    # ``database`` parameter acceptable types
+    DBConfig = Union[Dict[str, Any], str, Database]
+
+__all__ = ['DataTable']
 
 
 class DataTable(playhouse.flask_utils.FlaskDB):
@@ -36,22 +40,22 @@ class DataTable(playhouse.flask_utils.FlaskDB):
     """
 
     #: Database connection instance.
-    database: peewee.Database
+    database: 'Database'
     #: Base class for data models.
-    base_model_class: Model
+    base_model_class: 'Model'
     #: :class:`flask.Flask` instance to integrate `DataTables`_.
-    _app: flask.Flask
+    _app: 'Flask'
     #: Database connection configurations.
-    _db: DBConfig
+    _db: 'DBConfig'
 
-    def __init__(self, app: Optional[flask.Flask] = None,
-                 database: Optional[DBConfig] = None,
-                 model_class: Optional[peewee.Model] = None):
+    def __init__(self, app: 'Optional[Flask]' = None,
+                 database: 'Optional[DBConfig]' = None,
+                 model_class: 'Optional[Type[Model]]' = None):
         if model_class is None:
             model_class = Model
         super().__init__(app, database, model_class)
 
-    def init_app(self, app: flask.Flask) -> None:
+    def init_app(self, app: 'Flask') -> None:
         """Initialise the :class:`~flask_datatables.app.DataTables` with the :class:`~flask.Flask` application.
 
         Args:
