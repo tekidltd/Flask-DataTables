@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_datatables.typing &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_datatables.typing</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=unsubscriptable-object</span>
+<span class="sd">&quot;&quot;&quot;Type Hints</span>
+<span class="sd">================</span>
+
+<span class="sd">As described in the `DataTables documentation`_, the client side sends</span>
+<span class="sd">specific format of query parameters to the server side.</span>
+
+<span class="sd">When making a request to the server using server-side processing, DataTables</span>
+<span class="sd">will send data as described in :class:`~flask_datatables.typing.Query` in order</span>
+<span class="sd">to let the server know what data is required.</span>
+
+<span class="sd">Once DataTables has made a request for data, with the above parameters sent to</span>
+<span class="sd">the server, it expects JSON data to be returned to it, with the parameters set</span>
+<span class="sd">as described in :class:`~flask_datatables.typing.Response`.</span>
+
+<span class="sd">.. _DataTables documentation: https://datatables.net/manual/server-side</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Query&#39;</span><span class="p">,</span> <span class="s1">&#39;Response&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Search"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Search">[docs]</a><span class="k">class</span> <span class="nc">Search</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Search information.&quot;&quot;&quot;</span>
+
+    <span class="c1">#: Global search value. To be applied to all columns</span>
+    <span class="c1">#: which have ``searchable`` as :data:`True`.</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: :data:`True` if the global filter should be treated</span>
+    <span class="c1">#: as a regular expression for advanced searching,</span>
+    <span class="c1">#: :data:`False` otherwise. Note that normally server-side</span>
+    <span class="c1">#: processing scripts will not perform regular expression</span>
+    <span class="c1">#: searching for performance reasons on large data sets,</span>
+    <span class="c1">#: but it is technically possible and at the discretion of</span>
+    <span class="c1">#: your script.</span>
+    <span class="n">regex</span><span class="p">:</span> <span class="nb">bool</span></div>
+
+
+<div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Order">[docs]</a><span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ordering information.&quot;&quot;&quot;</span>
+
+    <span class="c1">#: Column to which ordering should be applied. This is an</span>
+    <span class="c1">#: index reference to the :attr:`~tekid.ext.datatables.Query.columns`</span>
+    <span class="c1">#: array of information that is also submitted to the server.</span>
+    <span class="n">column</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Ordering direction for this column. It will be ``asc`` or</span>
+    <span class="c1">#: ``desc`` to indicate ascending ordering or descending ordering,</span>
+    <span class="c1">#: respectively.</span>
+    <span class="nb">dir</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;asc&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Column"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Column">[docs]</a><span class="k">class</span> <span class="nc">Column</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Column data.&quot;&quot;&quot;</span>
+
+    <span class="c1">#: Column&#39;s data source, as defined by :js:attr:`columns.data`.</span>
+    <span class="n">data</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: Column&#39;s name, as defined by :js:attr:`columns.name`.</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: Flag to indicate if this column is searchable (:data:`True`) or</span>
+    <span class="c1">#: not (:data:`False`). This is controlled by :js:attr:`columns.searchable`.</span>
+    <span class="n">searchable</span><span class="p">:</span> <span class="nb">bool</span>
+
+    <span class="c1">#: Flag to indicate if this column is orderable (:data:`True`) or</span>
+    <span class="c1">#: not (:data:`False`). This is controlled by :js:attr:`columns.orderable`.</span>
+    <span class="n">orderable</span><span class="p">:</span> <span class="nb">bool</span>
+
+    <span class="c1">#: Search information.</span>
+    <span class="n">search</span><span class="p">:</span> <span class="n">Search</span></div>
+
+
+<div class="viewcode-block" id="Query"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Query">[docs]</a><span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sent parameters.</span>
+
+<span class="sd">    When making a request to the server using server-side processing,</span>
+<span class="sd">    DataTables will send the following data in order to let the server</span>
+<span class="sd">    know what data is required.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Draw counter. This is used by DataTables to ensure</span>
+    <span class="c1">#: that the Ajax returns from server-side processing</span>
+    <span class="c1">#: requests are drawn in sequence by DataTables (Ajax</span>
+    <span class="c1">#: requests are asynchronous and thus can return out</span>
+    <span class="c1">#: of sequence). This is used as part of the ``draw``</span>
+    <span class="c1">#: return parameter (see below).</span>
+    <span class="n">draw</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Paging first record indicator. This is the start</span>
+    <span class="c1">#: point in the current data set (0 index based - i.e.</span>
+    <span class="c1">#: 0 is the first record).</span>
+    <span class="n">start</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Number of records that the table can display in the</span>
+    <span class="c1">#: current draw. It is expected that the number of records</span>
+    <span class="c1">#: returned will be equal to this number, unless the server</span>
+    <span class="c1">#: has fewer records to return. Note that this can be -1 to</span>
+    <span class="c1">#: indicate that all records should be returned (although</span>
+    <span class="c1">#: that negates any benefits of server-side processing!)</span>
+    <span class="n">length</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Search information.</span>
+    <span class="n">search</span><span class="p">:</span> <span class="n">Search</span>
+
+    <span class="c1">#: Ordering information.</span>
+    <span class="n">order</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Order</span><span class="p">]</span>
+
+    <span class="c1">#: Column data.</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Column</span><span class="p">]</span></div>
+
+
+<span class="c1">#: Server-side processing return using arrays as the data source for the table.</span>
+<span class="n">ArrayData</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ObjectData"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.ObjectData">[docs]</a><span class="k">class</span> <span class="nc">ObjectData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Server-side processing return using objects.&quot;&quot;&quot;</span>
+
+    <span class="c1">#: Set the ID property of the ``tr`` node to this value.</span>
+    <span class="n">DT_RowId</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: Add this class to the ``tr`` node.</span>
+    <span class="n">DT_RowClass</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="c1">#: Add the data contained in the object to the row using the `jQuery`_</span>
+    <span class="c1">#: :js:func:`data()` method to set the data, which can also then be used</span>
+    <span class="c1">#: for later retrieval (for example on a click event).</span>
+    <span class="n">DT_RowData</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+
+    <span class="c1">#: Add the data contained in the object to the row ``tr`` node as attributes.</span>
+    <span class="c1">#: The object keys are used as the attribute keys and the values as the</span>
+    <span class="c1">#: corresponding attribute values. This is performed using using the `jQuery`_</span>
+    <span class="c1">#: :js:func:`param()` method. Please note that this option requires **DataTables</span>
+    <span class="c1">#: 1.10.5** or newer.</span>
+    <span class="n">DT_RowAttr</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returned data.</span>
+
+<span class="sd">    Once DataTables has made a request for data, with the above</span>
+<span class="sd">    parameters sent to the server, it expects JSON data to be</span>
+<span class="sd">    returned to it, with the following parameters set.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: The draw counter that this object is a response to - from</span>
+    <span class="c1">#: the :attr:`~tekid.ext.datatables.Query.draw` parameter sent</span>
+    <span class="c1">#: as part of the data request. Note that it is **strongly</span>
+    <span class="c1">#: recommended for security reasons** that you cast this parameter</span>
+    <span class="c1">#: to an integer, rather than simply echoing back to the client</span>
+    <span class="c1">#: what it sent in the ``draw`` parameter, in order to prevent</span>
+    <span class="c1">#: Cross Site Scripting (XSS) attacks.</span>
+    <span class="n">draw</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Total records, before filtering (i.e. the total number of</span>
+    <span class="c1">#: records in the database)</span>
+    <span class="n">recordsTotal</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: Total records, after filtering (i.e. the total number of records</span>
+    <span class="c1">#: after filtering has been applied - not just the number of records</span>
+    <span class="c1">#: being returned for this page of data).</span>
+    <span class="n">recordsFiltered</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1">#: The data to be displayed in the table. This is an array of data</span>
+    <span class="c1">#: source objects, one for each row, which will be used by DataTables.</span>
+    <span class="c1">#: Note that this parameter&#39;s name can be changed using the</span>
+    <span class="c1">#: :js:data:`ajax` option&#39;s ``dataSrc`` property.</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ArrayData</span><span class="p">,</span> <span class="n">ObjectData</span><span class="p">]]</span>
+
+    <span class="c1">#: *Optional*: If an error occurs during the running of the server-side</span>
+    <span class="c1">#: processing script, you can inform the user of this error by passing</span>
+    <span class="c1">#: back the error message to be displayed using this parameter. Do not</span>
+    <span class="c1">#: include if there is no error.</span>
+    <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

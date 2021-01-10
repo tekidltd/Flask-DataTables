@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database Connection &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Base Model" href="model.html" />
+    <link rel="prev" title="Flask &amp; peewee integration with DataTables server-side processing" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <span class="target" id="module-flask_datatables.database"></span><div class="section" id="database-connection">
+<h1>Database Connection<a class="headerlink" href="#database-connection" title="Permalink to this headline">¶</a></h1>
+<p>We made some monkeypatch for <code class="xref py py-mod docutils literal notranslate"><span class="pre">peewee</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">playhouse.flask_utils</span></code>
+in order to better support the integration with <code class="xref py py-mod docutils literal notranslate"><span class="pre">Flask</span></code>.</p>
+<dl class="py class">
+<dt id="flask_datatables.database.DataTable">
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.database.</code><code class="sig-name descname">DataTable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">database</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">model_class</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/database.html#DataTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.database.DataTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">playhouse.flask_utils.FlaskDB</span></code></p>
+<p>Server-side processing integration with <a class="reference external" href="https://datatables.net/">DataTables</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> (<em>Optional</em><em>[</em><em>Flask</em><em>]</em>) – <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask" title="(in Flask v1.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask.Flask</span></code></a> instance to integrate <a class="reference external" href="https://datatables.net/">DataTables</a>.</p></li>
+<li><p><strong>database</strong> (<em>Optional</em><em>[</em><em>DBConfig</em><em>]</em>) – Database connection configurations.</p></li>
+<li><p><strong>model_class</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="model.html#flask_datatables.model.Model" title="flask_datatables.model.Model"><em>Model</em></a><em>]</em><em>]</em>) – <a class="reference internal" href="model.html#flask_datatables.model.Model" title="flask_datatables.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask_datatables.model.Model</span></code></a> class to create
+data models.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="flask_datatables.database.DataTable.init_app">
+<code class="sig-name descname">init_app</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/database.html#DataTable.init_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.database.DataTable.init_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise the <code class="xref py py-class docutils literal notranslate"><span class="pre">DataTables</span></code> with the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask" title="(in Flask v1.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flask</span></code></a> application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>app</strong> (<em>Flask</em>) – <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask" title="(in Flask v1.1.x)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flask.Flask</span></code></a> instance to integrate <a class="reference external" href="https://datatables.net/">DataTables</a>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="flask_datatables.database.DataTable.base_model_class">
+<code class="sig-name descname">base_model_class</code><em class="property">: <a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Model" title="(in peewee v3.14.0)">Model</a></em><a class="headerlink" href="#flask_datatables.database.DataTable.base_model_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for data models.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="flask_datatables.database.DataTable.database">
+<code class="sig-name descname">database</code><em class="property">: <a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Database" title="(in peewee v3.14.0)">Database</a></em><a class="headerlink" href="#flask_datatables.database.DataTable.database" title="Permalink to this definition">¶</a></dt>
+<dd><p>Database connection instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Flask &amp; peewee integration with DataTables server-side processing</a></li>
+      <li>Next: <a href="model.html" title="next chapter">Base Model</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+      |
+      <a href="_sources/database.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

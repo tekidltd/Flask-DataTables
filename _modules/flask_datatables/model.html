@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_datatables.model &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_datatables.model</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=unsubscriptable-object</span>
+<span class="sd">&quot;&quot;&quot;Base Model</span>
+<span class="sd">================</span>
+
+<span class="sd">We extends the :class:`peewee.Model` class to integrate with the</span>
+<span class="sd">server-side processing logic of `DataTables`_. Some monkeypathes</span>
+<span class="sd">were made as certain functionalities with :mod:`peewee` are not</span>
+<span class="sd">correctly implemented.</span>
+
+<span class="sd">.. _DataTables: https://datatables.net/</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span> <span class="nn">flask</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">Metadata</span> <span class="k">as</span> <span class="n">_Metadata</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">Model</span> <span class="k">as</span> <span class="n">_Model</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">parse_request</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+    <span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">AutoField</span><span class="p">,</span> <span class="n">Expression</span><span class="p">,</span> <span class="n">ModelSelect</span><span class="p">,</span> <span class="n">Ordering</span>
+
+    <span class="kn">from</span> <span class="nn">.fields</span> <span class="kn">import</span> <span class="n">Field</span>
+    <span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">ArrayData</span><span class="p">,</span> <span class="n">ObjectData</span><span class="p">,</span> <span class="n">Query</span><span class="p">,</span> <span class="n">Response</span>
+
+    <span class="c1"># factory function to convert records</span>
+    <span class="n">Factory</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="s1">&#39;Model&#39;</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="n">ArrayData</span><span class="p">,</span> <span class="n">ObjectData</span><span class="p">]]</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="s1">&#39;Metadata&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Metadata"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Metadata">[docs]</a><span class="k">class</span> <span class="nc">Metadata</span><span class="p">(</span><span class="n">_Metadata</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Basic metadata for data models.</span>
+
+<span class="sd">    ``Flask-DataTables`` extends the original metadata record from :mod:`peewee`</span>
+<span class="sd">    with a :attr:`~flask_datatables.model.Metadata.datatables` switch to indicate</span>
+<span class="sd">    if current data model supports and/or enables `DataTables`_ server-side</span>
+<span class="sd">    processing integration.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: `DataTables`_ integration indicator flag.</span>
+    <span class="n">datatables</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extends :class:`peewee.Model` with `DataTables`_ support.&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="s1">&#39;AutoField&#39;</span>
+    <span class="n">_meta</span><span class="p">:</span> <span class="s1">&#39;Metadata&#39;</span>
+
+    <span class="c1">#: `DataTables`_ orderable fields.</span>
+    <span class="n">dt_orderable</span><span class="p">:</span> <span class="s1">&#39;Dict[str, Field]&#39;</span>
+
+    <span class="c1">#: `DataTables`_ searchable fields.</span>
+    <span class="n">dt_searchable</span><span class="p">:</span> <span class="s1">&#39;Dict[str, Field]&#39;</span>
+
+<div class="viewcode-block" id="Model.validate_model"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.validate_model">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">validate_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Validates data model and dynamically insert fields.</span>
+
+<span class="sd">        If `DataTables`_ integration is enabled for the data model, this method</span>
+<span class="sd">        will insert fields (database columns) for both *order* and *search*</span>
+<span class="sd">        operations respectively on each defined fields according to the original</span>
+<span class="sd">        field type definition.</span>
+
+<span class="sd">        By default, each field is *orderable* and/or *searchable* as long as the</span>
+<span class="sd">        :attr:`~flask_datatables.model.Metadata.datatables` switch is enabled.</span>
+<span class="sd">        When the :attr:`~flask_datatables.fields.Field.orderable` and/or</span>
+<span class="sd">        :attr:`~flask_datatables.fields.Field.searchable` attributes are set to</span>
+<span class="sd">        an instance of a :class:`~peewee.Field`, ``Flask-DataTables`` will insert</span>
+<span class="sd">        additional fields of such type with ``_dt_order`` and/or ``_dt_search``</span>
+<span class="sd">        suffix as the field names accordingly.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">dt_orderable</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">dt_searchable</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">metaclass</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_meta</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">metaclass</span><span class="p">,</span> <span class="s1">&#39;datatables&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">metaclass</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">orderable</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;orderable&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">orderable</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orderable</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
+                        <span class="n">metaclass</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_dt_order&#39;</span><span class="p">,</span> <span class="n">orderable</span><span class="p">)</span>
+                        <span class="n">target</span> <span class="o">=</span> <span class="n">metaclass</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_dt_order&#39;</span><span class="p">]</span>
+                        <span class="nb">setattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_dt_order&#39;</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                    <span class="bp">cls</span><span class="o">.</span><span class="n">dt_orderable</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+
+                <span class="n">searchable</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;searchable&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">searchable</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">searchable</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
+                        <span class="n">metaclass</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_dt_search&#39;</span><span class="p">,</span> <span class="n">searchable</span><span class="p">)</span>
+                        <span class="n">target</span> <span class="o">=</span> <span class="n">metaclass</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_dt_search&#39;</span><span class="p">]</span>
+                        <span class="nb">setattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_dt_order&#39;</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                    <span class="bp">cls</span><span class="o">.</span><span class="n">dt_searchable</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate_model</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Model.save"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="s1">&#39;Optional[List[Field]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Save the data in the model instance.</span>
+
+<span class="sd">        The method extends the original :meth:`peewee.Model.save` method by automatically</span>
+<span class="sd">        update the *searching* and *ordering* field data with the actual data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            force_insert: Force ``INSERT`` query.</span>
+<span class="sd">            only: Only save the given :class:`~peewee.Field` instances.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of rows modified.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metaclass</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_orderable</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">metaclass</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39;dt_order&#39;</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">dt_order</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt_searchable</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">metaclass</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s1">&#39;dt_search&#39;</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">force_insert</span><span class="p">,</span> <span class="n">only</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Model.search"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.search">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="s1">&#39;Optional[Query]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">factory</span><span class="p">:</span> <span class="s1">&#39;Optional[Factory]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Response&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Server-side processing integration with `DataTables`_.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            query: Query parameters sent from the client-side.</span>
+<span class="sd">            factory: Factory function to prepare the server-side data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Selected information from the database in format to</span>
+<span class="sd">            be sent to `DataTables`_.</span>
+
+<span class="sd">        See Also:</span>
+<span class="sd">            The ``factory`` function takes exactly one parameter, the data</span>
+<span class="sd">            record returned from :mod:`peewee` selection, and returns</span>
+<span class="sd">            the converted data of fields. See</span>
+<span class="sd">            :func:`flask_datatables.utils.prepare_response` for an example.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">parse_request</span><span class="p">(</span><span class="n">flask</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[BaseException]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">draw</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">query</span><span class="p">[</span><span class="s1">&#39;draw&#39;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">draw</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;draw&#39;</span><span class="p">]</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+        <span class="n">global_search_info</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;search&#39;</span><span class="p">]</span>
+        <span class="n">global_search_value</span> <span class="o">=</span> <span class="n">global_search_info</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+        <span class="n">global_search_regex</span> <span class="o">=</span> <span class="n">global_search_info</span><span class="p">[</span><span class="s1">&#39;regex&#39;</span><span class="p">]</span>
+
+        <span class="n">field_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[Field]</span>
+        <span class="n">extra_field_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>  <span class="c1"># type: List[Field]</span>
+        <span class="n">where_query_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[Expression]</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]:</span>
+            <span class="n">field_name</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">source_field</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span>  <span class="c1"># type: Field</span>
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">field_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source_field</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">column</span><span class="p">[</span><span class="s1">&#39;searchable&#39;</span><span class="p">]:</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">field</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">source_field</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">_dt_search&#39;</span><span class="p">]</span>  <span class="c1"># type: Field</span>
+                <span class="n">extra_field_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">field</span> <span class="o">=</span> <span class="n">source_field</span>
+
+            <span class="n">search_info</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s1">&#39;search&#39;</span><span class="p">]</span>
+            <span class="n">search_value</span> <span class="o">=</span> <span class="n">search_info</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">search_value</span><span class="p">:</span>
+                <span class="n">search_regex</span> <span class="o">=</span> <span class="n">search_info</span><span class="p">[</span><span class="s1">&#39;regex&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">search_value</span> <span class="o">=</span> <span class="n">global_search_value</span>
+                <span class="n">search_regex</span> <span class="o">=</span> <span class="n">global_search_regex</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">search_value</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1">#field = field.collate(&#39;utf8mb4_unicode_ci&#39;)  # case-insensitive search</span>
+            <span class="k">if</span> <span class="n">search_regex</span><span class="p">:</span>
+                <span class="n">where_query</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">iregexp</span><span class="p">(</span><span class="n">search_value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">where_query</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">search_value</span><span class="p">)</span>
+            <span class="n">where_query_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">where_query</span><span class="p">)</span>
+
+        <span class="n">order_by_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[Ordering]</span>
+        <span class="k">for</span> <span class="n">order_info</span> <span class="ow">in</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;order&#39;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">column_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">order_info</span><span class="p">[</span><span class="s1">&#39;column&#39;</span><span class="p">])</span>
+                <span class="n">source_field</span> <span class="o">=</span> <span class="n">field_list</span><span class="p">[</span><span class="n">column_index</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">field</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">source_field</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">_dt_order&#39;</span><span class="p">]</span>
+                <span class="n">extra_field_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">field</span> <span class="o">=</span> <span class="n">source_field</span>
+
+            <span class="n">order_dir</span> <span class="o">=</span> <span class="n">order_info</span><span class="p">[</span><span class="s1">&#39;dir&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">order_dir</span> <span class="o">==</span> <span class="s1">&#39;asc&#39;</span><span class="p">:</span>
+                <span class="n">order_by_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">asc</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">order_dir</span> <span class="o">==</span> <span class="s1">&#39;desc&#39;</span><span class="p">:</span>
+                <span class="n">order_by_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;unknown ordering direction: </span><span class="si">{</span><span class="n">order_dir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+
+        <span class="n">select_query</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">*</span><span class="n">field_list</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_field_list</span><span class="p">)</span>  <span class="c1"># type: ModelSelect</span>
+        <span class="k">if</span> <span class="n">where_query_list</span><span class="p">:</span>
+            <span class="n">select_query</span> <span class="o">=</span> <span class="n">select_query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">:</span> <span class="n">p0</span> <span class="o">|</span> <span class="n">p1</span><span class="p">,</span> <span class="n">where_query_list</span><span class="p">,</span>
+            <span class="p">))</span>
+        <span class="n">select_query</span> <span class="o">=</span> <span class="n">select_query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="o">*</span><span class="n">order_by_list</span><span class="p">)</span>
+
+        <span class="n">records_total</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># pylint: disable=no-value-for-parameter</span>
+        <span class="n">records_filtered</span> <span class="o">=</span> <span class="n">select_query</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[Union[ArrayData, ObjectData]]</span>
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">select_query</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">objects</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">factory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="n">factory</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">__data__</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">field_list</span><span class="p">]</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">flask</span><span class="o">.</span><span class="n">current_app</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="n">error_msg</span> <span class="o">=</span> <span class="s1">&#39;Error processing query...</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">for</span> <span class="n">exc</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                <span class="n">error_msg</span> <span class="o">+=</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">error_msg</span> <span class="o">+=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span> <span class="n">exc</span><span class="p">,</span> <span class="n">exc</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;draw&#39;</span><span class="p">:</span> <span class="n">draw</span><span class="p">,</span>
+            <span class="s1">&#39;recordsTotal&#39;</span><span class="p">:</span> <span class="n">records_total</span><span class="p">,</span>
+            <span class="s1">&#39;recordsFiltered&#39;</span><span class="p">:</span> <span class="n">records_filtered</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">error_msg</span><span class="p">,</span>
+        <span class="p">}</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

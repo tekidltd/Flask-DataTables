@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_datatables.database &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_datatables.database</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=unsubscriptable-object</span>
+<span class="sd">&quot;&quot;&quot;Database Connection</span>
+<span class="sd">=========================</span>
+
+<span class="sd">We made some monkeypatch for :mod:`peewee` and :mod:`playhouse.flask_utils`</span>
+<span class="sd">in order to better support the integration with :mod:`Flask`.</span>
+
+<span class="sd">.. _DataTables: https://datatables.net/</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span> <span class="nn">playhouse.flask_utils</span>
+
+<span class="kn">from</span> <span class="nn">.model</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+
+    <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+    <span class="kn">from</span> <span class="nn">playhouse.flask_utils</span> <span class="kn">import</span> <span class="n">FlaskDB</span> <span class="k">as</span> <span class="n">Database</span>
+
+    <span class="c1"># ``database`` parameter acceptable types</span>
+    <span class="n">DBConfig</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Database</span><span class="p">]</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DataTable&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="DataTable"><a class="viewcode-back" href="../../database.html#flask_datatables.database.DataTable">[docs]</a><span class="k">class</span> <span class="nc">DataTable</span><span class="p">(</span><span class="n">playhouse</span><span class="o">.</span><span class="n">flask_utils</span><span class="o">.</span><span class="n">FlaskDB</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Server-side processing integration with `DataTables`_.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app: :class:`flask.Flask` instance to integrate `DataTables`_.</span>
+<span class="sd">        database: Database connection configurations.</span>
+<span class="sd">        model_class: :class:`flask_datatables.model.Model` class to create</span>
+<span class="sd">            data models.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: Database connection instance.</span>
+    <span class="n">database</span><span class="p">:</span> <span class="s1">&#39;Database&#39;</span>
+    <span class="c1">#: Base class for data models.</span>
+    <span class="n">base_model_class</span><span class="p">:</span> <span class="s1">&#39;Model&#39;</span>
+    <span class="c1">#: :class:`flask.Flask` instance to integrate `DataTables`_.</span>
+    <span class="n">_app</span><span class="p">:</span> <span class="s1">&#39;Flask&#39;</span>
+    <span class="c1">#: Database connection configurations.</span>
+    <span class="n">_db</span><span class="p">:</span> <span class="s1">&#39;DBConfig&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="s1">&#39;Optional[Flask]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">database</span><span class="p">:</span> <span class="s1">&#39;Optional[DBConfig]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">model_class</span><span class="p">:</span> <span class="s1">&#39;Optional[Type[Model]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">model_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">model_class</span> <span class="o">=</span> <span class="n">Model</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">database</span><span class="p">,</span> <span class="n">model_class</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DataTable.init_app"><a class="viewcode-back" href="../../database.html#flask_datatables.database.DataTable.init_app">[docs]</a>    <span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="s1">&#39;Flask&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialise the :class:`~flask_datatables.app.DataTables` with the :class:`~flask.Flask` application.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app: :class:`flask.Flask` instance to integrate `DataTables`_.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s1">&#39;datatables&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

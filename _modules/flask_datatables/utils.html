@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flask_datatables.utils &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for flask_datatables.utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=unsubscriptable-object</span>
+<span class="sd">&quot;&quot;&quot;Utilities &amp; Auxiliaries</span>
+<span class="sd">=============================</span>
+
+<span class="sd">We provided some auxiliary functions for ``Flask-DataTables``.</span>
+
+<span class="sd">* :func:`~flask_datatables.utils.render_macro` renders a given</span>
+<span class="sd">  ``macro`` from the Jinja templates</span>
+<span class="sd">* :func:`~flask_datatables.utils.prepare_response` is the default</span>
+<span class="sd">  built-in method for ``factory`` parameter of</span>
+<span class="sd">  :meth:`Model.search &lt;flask_datatables.model.Model.search&gt;`</span>
+<span class="sd">* :func:`~flask_datatables.utils.parse_request` is the utility</span>
+<span class="sd">  function to parse `DataTables`_ client-side query parameters</span>
+<span class="sd">  from the URL</span>
+
+<span class="sd">.. _DataTables: https://datatables.net/</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">import</span> <span class="nn">flask</span>
+<span class="kn">import</span> <span class="nn">peewee</span>
+<span class="kn">import</span> <span class="nn">werkzeug.datastructures</span>
+<span class="kn">import</span> <span class="nn">werkzeug.exceptions</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+    <span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span>
+    <span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">werkzeug.datastructures</span> <span class="kn">import</span> <span class="n">ImmutableMultiDict</span>
+
+    <span class="kn">from</span> <span class="nn">.typing</span> <span class="kn">import</span> <span class="n">ObjectData</span><span class="p">,</span> <span class="n">Query</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;render_macro&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;prepare_response&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;parse_request&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="render_macro"><a class="viewcode-back" href="../../utils.html#flask_datatables.utils.render_macro">[docs]</a><span class="k">def</span> <span class="nf">render_macro</span><span class="p">(</span><span class="n">template_name_or_list</span><span class="p">:</span> <span class="s1">&#39;Union[str, List[str]]&#39;</span><span class="p">,</span> <span class="n">macro</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates and renders a **macro** from the template.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template_name_or_list: The name of the template to be rendered, or an iterable with template names</span>
+<span class="sd">            the first one existing will be rendered.</span>
+<span class="sd">        macro: The name of macro to be called.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        **context: The variables that should be available in the context of the template.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The rendered macro.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s1">&#39;Environment&#39;</span><span class="p">,</span> <span class="n">flask</span><span class="o">.</span><span class="n">current_app</span><span class="o">.</span><span class="n">jinja_env</span><span class="p">)</span><span class="o">.</span><span class="n">get_or_select_template</span><span class="p">(</span><span class="n">template_name_or_list</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type] # pylint: disable=line-too-long</span>
+    <span class="n">macro_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">macro</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">macro_func</span><span class="p">(</span><span class="o">**</span><span class="n">context</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="prepare_response"><a class="viewcode-back" href="../../utils.html#flask_datatables.utils.prepare_response">[docs]</a><span class="k">def</span> <span class="nf">prepare_response</span><span class="p">(</span><span class="n">template</span><span class="p">:</span> <span class="s1">&#39;Union[str, List[str]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Callable[[Model], ObjectData]&#39;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Prepare response object data.</span>
+
+<span class="sd">    The function returns a wrapper function to use the ``template`` as a factory to</span>
+<span class="sd">    render HTML response blocks. The Jinja templates should have **macro** blocks</span>
+<span class="sd">    for each target field named after ``render_{field_name}`` and takes only one</span>
+<span class="sd">    argument ``record`` as the selected data model record.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        template: Path to the macro template.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Prepared response object data.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        See :func:`flask_datatables.utils.render_macro` for more information.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="n">peewee</span><span class="o">.</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ObjectData&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: ObjectData</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">record</span><span class="o">.</span><span class="n">__data__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">render_macro</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;render_</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">record</span><span class="o">=</span><span class="n">record</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>  <span class="c1"># type: ignore[misc]</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<span class="k">def</span> <span class="nf">_parse_int</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Parse argument as :obj:`int`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arg: Original request argument.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parsed query argument.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_bool</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Parse argument as :obj:`bool`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arg: Original request argument.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parsed query argument.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_str</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Parse argument as :obj:`str`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arg: Original request argument.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parsed query argument.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">arg</span>
+
+
+<div class="viewcode-block" id="parse_request"><a class="viewcode-back" href="../../utils.html#flask_datatables.utils.parse_request">[docs]</a><span class="k">def</span> <span class="nf">parse_request</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;Optional[ImmutableMultiDict]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Query&#39;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Parse :attr:`flask.request.args &lt;flask.Request.args&gt;` as :class:`~tekid.ext.datatables.Query`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Original request arguments. The default value is inferred from</span>
+<span class="sd">            :attr:`request.args &lt;flask.Request.args&gt;`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parsed query dictionary.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">flask</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">args</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;draw&#39;</span><span class="p">:</span> <span class="n">_parse_int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;draw&#39;</span><span class="p">)),</span>
+        <span class="s1">&#39;columns&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">_parse_int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)),</span>
+        <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="n">_parse_int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;length&#39;</span><span class="p">)),</span>
+        <span class="s1">&#39;search&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">_parse_str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search[value]&#39;</span><span class="p">)),</span>
+            <span class="s1">&#39;regex&#39;</span><span class="p">:</span> <span class="n">_parse_bool</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search[regex]&#39;</span><span class="p">)),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;_&#39;</span><span class="p">:</span> <span class="n">_parse_int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)),</span>
+    <span class="p">}</span>  <span class="c1"># type: Query</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;columns[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][data]&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="n">werkzeug</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">BadRequestKeyError</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">query</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">_parse_str</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">_parse_str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;columns[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][data]&#39;</span><span class="p">)),</span>
+            <span class="s1">&#39;searchable&#39;</span><span class="p">:</span> <span class="n">_parse_bool</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;columns[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][searchable]&#39;</span><span class="p">)),</span>
+            <span class="s1">&#39;orderable&#39;</span><span class="p">:</span> <span class="n">_parse_bool</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;columns[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][orderable]&#39;</span><span class="p">)),</span>
+            <span class="s1">&#39;search&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">_parse_str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;columns[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][search][value]&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;regex&#39;</span><span class="p">:</span> <span class="n">_parse_bool</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;columns[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][search][regex]&#39;</span><span class="p">)),</span>
+            <span class="p">},</span>
+        <span class="p">})</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;order[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][column]&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="n">werkzeug</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">BadRequestKeyError</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">query</span><span class="p">[</span><span class="s1">&#39;order&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;column&#39;</span><span class="p">:</span> <span class="n">_parse_int</span><span class="p">(</span><span class="n">column</span><span class="p">),</span>
+            <span class="s1">&#39;dir&#39;</span><span class="p">:</span> <span class="n">_parse_str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;order[</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">][dir]&#39;</span><span class="p">)),</span>  <span class="c1"># type: ignore[typeddict-item]</span>
+        <span class="p">})</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">query</span></div>
+
+
+<span class="k">def</span> <span class="nf">build_cache</span><span class="p">(</span><span class="n">query_string</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Build a key to cache the query parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        query_string: Query parameters in string form. The default value is inferred</span>
+<span class="sd">            from :attr:`request.query_string &lt;flask.Request.query_string&gt;`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A string literal representing the query parameters.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">query_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">query_string</span> <span class="o">=</span> <span class="n">flask</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">query_string</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="n">query_parsed</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">parse_qsl</span><span class="p">(</span><span class="n">query_string</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">werkzeug</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">MultiDict</span><span class="p">(</span><span class="n">query_parsed</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="s1">&#39;draw&#39;</span> <span class="ow">in</span>  <span class="n">query</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;draw&#39;</span><span class="p">]</span>
+
+    <span class="n">query_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">query_sorted</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask &amp; peewee integration with DataTables server-side processing &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Database Connection" href="database.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="flask-peewee-integration-with-datatables-server-side-processing">
+<h1>Flask &amp; peewee integration with DataTables server-side processing<a class="headerlink" href="#flask-peewee-integration-with-datatables-server-side-processing" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+</ul>
+</div>
+<p>As <a class="reference external" href="https://datatables.net/">DataTables</a> is a quite power and useful JavaScript library for manipulating
+and displaying data, we intended to make integration of the client-side DataTables
+scripts with the server-side processing based on <code class="docutils literal notranslate"><span class="pre">Flask</span></code> and <code class="docutils literal notranslate"><span class="pre">peewee</span></code>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As we have noticed, there’s already a <code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> library available
+on <a class="reference external" href="https://pypi.org/project/Flask-DataTables/">PyPI</a>. However, this package was intended for integration with <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">peewee</span></code>.</p>
+</div>
+<p>To start with, simply install the <code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> package from
+<a class="reference external" href="https://pypi.org/project/Flask-DataTables-peewee">PyPI</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install Flask-DataTables-peewee
+</pre></div>
+</div>
+<p>or should you prefer the bleeding edge version:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/JarryShaw/Flask-DataTables.git
+<span class="nb">cd</span> Flask-DataTables
+pip install .
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> is quite simple to use, just declare your data model in
+the preferable way from <code class="docutils literal notranslate"><span class="pre">peewee</span></code> and voilà, that’s it.</p>
+<p>Taking examples from the <code class="docutils literal notranslate"><span class="pre">peewee</span></code> <a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/playhouse.html">documentation</a>,
+we can have a <a class="reference external" href="https://datatables.net/">DataTables</a> integrated data model just as below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_datatables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CharField</span><span class="p">,</span> <span class="n">DataTable</span><span class="p">,</span> <span class="n">DateTimeField</span><span class="p">,</span>
+                              <span class="n">ForeignKeyField</span><span class="p">,</span> <span class="n">Metadata</span><span class="p">,</span> <span class="n">TextField</span><span class="p">)</span>
+
+<span class="n">DATABASE</span> <span class="o">=</span> <span class="s1">&#39;postgresql://postgres:password@localhost:5432/my_database&#39;</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">db_wrapper</span> <span class="o">=</span> <span class="n">DataTable</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db_wrapper</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">(</span><span class="n">Metadata</span><span class="p">):</span>
+        <span class="n">datatables</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="k">class</span> <span class="nc">Tweet</span><span class="p">(</span><span class="n">db_wrapper</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">ForeignKeyField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;tweets&#39;</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">TextField</span><span class="p">()</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">(</span><span class="n">Metadata</span><span class="p">):</span>
+        <span class="n">datatables</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>And now, you may simply call <a class="reference internal" href="model.html#flask_datatables.model.Model.search" title="flask_datatables.model.Model.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tweet.search</span></code></a>
+to perform the server-side processing queries.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>It is also possible to customise the orderable and/or searchable
+fields through <a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> parameters,
+and their corresponding behaviours by subclassing the
+<a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> classes.</p>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="database.html" title="next chapter">Database Connection</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

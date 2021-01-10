@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utilities &amp; Auxiliaries &#8212; Flask-DataTables 0.0.0.dev0 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Type Hints" href="typing.html" />
+    <link rel="prev" title="Data Fields" href="fields.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <span class="target" id="module-flask_datatables.utils"></span><div class="section" id="utilities-auxiliaries">
+<h1>Utilities &amp; Auxiliaries<a class="headerlink" href="#utilities-auxiliaries" title="Permalink to this headline">¶</a></h1>
+<p>We provided some auxiliary functions for <code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code>.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#flask_datatables.utils.render_macro" title="flask_datatables.utils.render_macro"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_macro()</span></code></a> renders a given
+<code class="docutils literal notranslate"><span class="pre">macro</span></code> from the Jinja templates</p></li>
+<li><p><a class="reference internal" href="#flask_datatables.utils.prepare_response" title="flask_datatables.utils.prepare_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">prepare_response()</span></code></a> is the default
+built-in method for <code class="docutils literal notranslate"><span class="pre">factory</span></code> parameter of
+<a class="reference internal" href="model.html#flask_datatables.model.Model.search" title="flask_datatables.model.Model.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Model.search</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flask_datatables.utils.parse_request" title="flask_datatables.utils.parse_request"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_request()</span></code></a> is the utility
+function to parse <a class="reference external" href="https://datatables.net/">DataTables</a> client-side query parameters
+from the URL</p></li>
+</ul>
+</div>
+<dl class="py function">
+<dt id="flask_datatables.utils.render_macro">
+<code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">render_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_name_or_list</span></em>, <em class="sig-param"><span class="n">macro</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">context</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#render_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.render_macro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates and renders a <strong>macro</strong> from the template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_name_or_list</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em><em>]</em>) – The name of the template to be rendered, or an iterable with template names
+the first one existing will be rendered.</p></li>
+<li><p><strong>macro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of macro to be called.</p></li>
+<li><p><strong>context</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>**context</strong> – The variables that should be available in the context of the template.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The rendered macro.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="flask_datatables.utils.prepare_response">
+<code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">prepare_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#prepare_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.prepare_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare response object data.</p>
+<p>The function returns a wrapper function to use the <code class="docutils literal notranslate"><span class="pre">template</span></code> as a factory to
+render HTML response blocks. The Jinja templates should have <strong>macro</strong> blocks
+for each target field named after <code class="docutils literal notranslate"><span class="pre">render_{field_name}</span></code> and takes only one
+argument <code class="docutils literal notranslate"><span class="pre">record</span></code> as the selected data model record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em><em>]</em>) – Path to the macro template.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Callable[[<a class="reference internal" href="model.html#flask_datatables.model.Model" title="flask_datatables.model.Model">Model</a>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData">ObjectData</a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Prepared response object data.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <a class="reference internal" href="#flask_datatables.utils.render_macro" title="flask_datatables.utils.render_macro"><code class="xref py py-func docutils literal notranslate"><span class="pre">flask_datatables.utils.render_macro()</span></code></a> for more information.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="flask_datatables.utils.parse_request">
+<code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">parse_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#parse_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.parse_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">flask.request.args</span></code></a> as <code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>Optional</em><em>[</em><em>ImmutableMultiDict</em><em>]</em>) – Original request arguments. The default value is inferred from
+<a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request.args</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query">Query</a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Parsed query dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Flask-DataTables</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=JarryShaw&repo=Flask-DataTables&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="fields.html" title="previous chapter">Data Fields</a></li>
+      <li>Next: <a href="typing.html" title="next chapter">Type Hints</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jarry Shaw.
+      
+      |
+      <a href="_sources/utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/JarryShaw/Flask-DataTables" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
