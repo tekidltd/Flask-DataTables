@@ -49,13 +49,13 @@ processing its field data, we added the following two attributes to save
 the <a class="reference external" href="https://datatables.net/">DataTables</a> integrated fields data.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.model.Model.dt_orderable">
-<code class="sig-name descname">dt_orderable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.0)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dt_orderable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field">flask_datatables.fields.Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> orderable fields.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.model.Model.dt_searchable">
-<code class="sig-name descname">dt_searchable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.0)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dt_searchable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field">flask_datatables.fields.Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> searchable fields.</p>
 </dd></dl>
 
@@ -91,7 +91,7 @@ update the <em>searching</em> and <em>ordering</em> field data with the actual d
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>force_insert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Force <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> query.</p></li>
-<li><p><strong>only</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Only save the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code> instances.</p></li>
+<li><p><strong>only</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a>]]) – Only save the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code> instances.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -110,12 +110,12 @@ update the <em>searching</em> and <em>ordering</em> field data with the actual d
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>query</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query"><em>Query</em></a><em>]</em>) – Query parameters sent from the client-side.</p></li>
-<li><p><strong>factory</strong> (<em>Optional</em><em>[</em><em>Factory</em><em>]</em>) – Factory function to prepare the server-side data.</p></li>
+<li><p><strong>query</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a>]) – Query parameters sent from the client-side.</p></li>
+<li><p><strong>factory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference internal" href="#flask_datatables.model.Model" title="flask_datatables.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectData</span></code></a>]]]) – Factory function to prepare the server-side data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Response" title="flask_datatables.typing.Response">Response</a></p>
+<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Response" title="flask_datatables.typing.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Selected information from the database in format to

@@ -53,7 +53,7 @@ from the URL</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>template_name_or_list</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em><em>]</em>) – The name of the template to be rendered, or an iterable with template names
+<li><p><strong>template_name_or_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – The name of the template to be rendered, or an iterable with template names
 the first one existing will be rendered.</p></li>
 <li><p><strong>macro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of macro to be called.</p></li>
 <li><p><strong>context</strong> (<em>Any</em>) – </p></li>
@@ -81,10 +81,10 @@ for each target field named after <code class="docutils literal notranslate"><sp
 argument <code class="docutils literal notranslate"><span class="pre">record</span></code> as the selected data model record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>template</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>]</em><em>]</em>) – Path to the macro template.</p>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – Path to the macro template.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Callable[[<a class="reference internal" href="model.html#flask_datatables.model.Model" title="flask_datatables.model.Model">Model</a>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData">ObjectData</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectData</span></code></a>]</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Prepared response object data.</p>
@@ -102,11 +102,11 @@ argument <code class="docutils literal notranslate"><span class="pre">record</sp
 <dd><p>Parse <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">flask.request.args</span></code></a> as <code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>args</strong> (<em>Optional</em><em>[</em><em>ImmutableMultiDict</em><em>]</em>) – Original request arguments. The default value is inferred from
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableMultiDict</span></code>]) – Original request arguments. The default value is inferred from
 <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request.args</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query">Query</a></p>
+<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Parsed query dictionary.</p>
