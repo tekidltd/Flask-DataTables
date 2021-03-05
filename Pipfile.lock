@@ -126,10 +126,10 @@
         },
         "peewee": {
             "hashes": [
-                "sha256:4a795dd30fc0e68f8da66bf03ec54e669a24ab7ce35c2c12a2e77fea7bcc21ce"
+                "sha256:9f4ad3f8e5e7719689cdd38ea13aa4e979e3805f8f675ea9005c9a6534f199ea"
             ],
             "index": "tuna",
-            "version": "==3.14.1"
+            "version": "==3.14.2"
         },
         "typing-extensions": {
             "hashes": [
