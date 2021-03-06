@@ -151,6 +151,15 @@
 <span class="c1"># legitimate imports of those modules.</span>
 
 
+<span class="k">def</span> <span class="nf">_type_convert</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;For converting None to type(None), and strings to ForwardRef.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">arg</span>
+
+
 <span class="k">def</span> <span class="nf">_type_check</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Check that the argument is a type, and return it (internal helper).</span>
 
@@ -167,10 +176,7 @@
     <span class="k">if</span> <span class="n">is_argument</span><span class="p">:</span>
         <span class="n">invalid_generic_forms</span> <span class="o">=</span> <span class="n">invalid_generic_forms</span> <span class="o">+</span> <span class="p">(</span><span class="n">ClassVar</span><span class="p">,</span> <span class="n">Final</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="n">_type_convert</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">_GenericAlias</span><span class="p">)</span> <span class="ow">and</span>
             <span class="n">arg</span><span class="o">.</span><span class="n">__origin__</span> <span class="ow">in</span> <span class="n">invalid_generic_forms</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> is not valid as type argument&quot;</span><span class="p">)</span>
@@ -892,13 +898,13 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Callable must be used as &quot;</span>
                             <span class="s2">&quot;Callable[[arg, ...], result].&quot;</span><span class="p">)</span>
         <span class="n">args</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">params</span>
-        <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="bp">Ellipsis</span><span class="p">:</span>
-            <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="bp">Ellipsis</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Callable[args, result]: args must be a list.&quot;</span>
-                                <span class="sa">f</span><span class="s2">&quot; Got </span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># This relaxes what args can be on purpose to allow things like</span>
+        <span class="c1"># PEP 612 ParamSpec.  Responsibility for whether a user is using</span>
+        <span class="c1"># Callable[...] properly is deferred to static type checkers.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getitem_inner__</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
     <span class="nd">@_tp_cache</span>
@@ -908,8 +914,9 @@
         <span class="n">result</span> <span class="o">=</span> <span class="n">_type_check</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="bp">Ellipsis</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy_with</span><span class="p">((</span><span class="n">_TypingEllipsis</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Callable[[arg, ...], result]: each arg must be a type.&quot;</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_type_check</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">,)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_type_convert</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">args</span> <span class="o">+</span> <span class="p">(</span><span class="n">result</span><span class="p">,)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy_with</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
@@ -1533,13 +1540,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">_AnnotatedAlias</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">__origin__</span><span class="p">,)</span> <span class="o">+</span> <span class="n">tp</span><span class="o">.</span><span class="n">__metadata__</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">_GenericAlias</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="p">(</span><span class="n">_GenericAlias</span><span class="p">,</span> <span class="n">GenericAlias</span><span class="p">)):</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">__args__</span>
         <span class="k">if</span> <span class="n">tp</span><span class="o">.</span><span class="n">__origin__</span> <span class="ow">is</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">Ellipsis</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">res</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">GenericAlias</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">tp</span><span class="o">.</span><span class="n">__args__</span>
     <span class="k">return</span> <span class="p">()</span>
 
 
@@ -2013,14 +2018,14 @@
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;TypedDict takes either a dict or keyword arguments,&quot;</span>
                         <span class="s2">&quot; but not both&quot;</span><span class="p">)</span>
 
-    <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;__annotations__&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fields</span><span class="p">),</span> <span class="s1">&#39;__total__&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">}</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;__annotations__&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fields</span><span class="p">)}</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Setting correct module is necessary to make typed dict classes pickleable.</span>
         <span class="n">ns</span><span class="p">[</span><span class="s1">&#39;__module__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">f_globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__main__&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
         <span class="k">pass</span>
 
-    <span class="k">return</span> <span class="n">_TypedDictMeta</span><span class="p">(</span><span class="n">typename</span><span class="p">,</span> <span class="p">(),</span> <span class="n">ns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_TypedDictMeta</span><span class="p">(</span><span class="n">typename</span><span class="p">,</span> <span class="p">(),</span> <span class="n">ns</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total</span><span class="p">)</span>
 
 <span class="n">_TypedDict</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">_TypedDictMeta</span><span class="p">,</span> <span class="s1">&#39;TypedDict&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{})</span>
 <span class="n">TypedDict</span><span class="o">.</span><span class="n">__mro_entries__</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">bases</span><span class="p">:</span> <span class="p">(</span><span class="n">_TypedDict</span><span class="p">,)</span>
