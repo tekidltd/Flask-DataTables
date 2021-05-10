@@ -41,7 +41,7 @@ or should you prefer the bleeding edge version:
 
 .. code-block:: shell
 
-   git clone https://github.com/JarryShaw/Flask-DataTables.git
+   git clone https://github.com/tekidltd/Flask-DataTables.git
    cd Flask-DataTables
    pip install .
 
