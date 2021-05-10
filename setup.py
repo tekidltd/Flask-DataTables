@@ -15,12 +15,12 @@ attrs = dict(
     version=__version__,
     description='Flask integration with DataTables and peewee.',
     long_description=long_description,
-    author='Jarry Shaw',
-    author_email='jarryshaw@icloud.com',
-    maintainer='Jarry Shaw',
-    maintainer_email='jarryshaw@icloud.com',
-    url='https://github.com/JarryShaw/Flask-DataTables',
-    download_url='https://github.com/JarryShaw/Flask-DataTables/archive/v%s.tar.gz' % __version__,
+    author='TEKID Ltd.',
+    author_email='contact@tek-id.com',
+    maintainer='Jarry XIAO',
+    maintainer_email='jarry.xiao@tek-id.com',
+    url='https://github.com/tekidltd/Flask-DataTables',
+    download_url='https://github.com/tekidltd/Flask-DataTables/archive/v%s.tar.gz' % __version__,
     # py_modules
     packages=[
         'flask_datatables',
@@ -67,7 +67,7 @@ attrs = dict(
     package_data={
         '': [
             'LICENSE',
-            'README.md',
+            'README.rst',
         ],
         'flask_datatables': [
             'py.typed',

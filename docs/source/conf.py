@@ -21,11 +21,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Flask-DataTables'
-copyright = '2020, Jarry Shaw'
-author = 'Jarry Shaw'
+copyright = '2020-2021, TEKID Ltd.'
+author = 'TEKID Ltd.'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.0.dev0'
+release = '0.1.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -109,7 +109,7 @@ html_static_path = ['_static']
 # documentation.
 html_theme_options = {
     'show_powered_by': False,
-    'github_user': 'JarryShaw',
+    'github_user': 'tekidltd',
     'github_repo': 'Flask-DataTables',
     'github_banner': True,
     'github_type': 'star',
