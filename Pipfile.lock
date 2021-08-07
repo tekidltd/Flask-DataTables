@@ -495,19 +495,19 @@
         },
         "pylint": {
             "hashes": [
-                "sha256:2e1a0eb2e8ab41d6b5dbada87f066492bb1557b12b76c47c2ee8aa8a11186594",
-                "sha256:8b838c8983ee1904b2de66cce9d0b96649a91901350e956d78f289c3bc87b48e"
+                "sha256:349b149e88e4357ed4f77ac3a4e61c0ab965cda293b6f4e58caf73d4b24ae551",
+                "sha256:adc11bec00c2084bf55c81dd69e26f2793fef757547997d44b21aed038f74403"
             ],
             "index": "tuna",
-            "version": "==2.9.6"
+            "version": "==3.0.0a4"
         },
         "pyparsing": {
             "hashes": [
-                "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
-                "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"
+                "sha256:1c6409312ce2ce2997896af5756753778d5f1603666dba5587804f09ad82ed27",
+                "sha256:f4896b4cc085a1f8f8ae53a1a90db5a86b3825ff73eb974dffee3d9e701007f4"
             ],
-            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==2.4.7"
+            "markers": "python_version >= '3.5'",
+            "version": "==3.0.0b2"
         },
         "pytz": {
             "hashes": [
