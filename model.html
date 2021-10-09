@@ -50,13 +50,13 @@ processing its field data, we added the following two attributes to save
 the <a class="reference external" href="https://datatables.net/">DataTables</a> integrated fields data.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.model.Model.dt_orderable">
-<code class="sig-name descname">dt_orderable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.4)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dt_orderable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.4)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> orderable fields.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.model.Model.dt_searchable">
-<code class="sig-name descname">dt_searchable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.4)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dt_searchable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.4)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> searchable fields.</p>
 </dd></dl>
 
@@ -77,7 +77,7 @@ additional fields of such type with <code class="docutils literal notranslate"><
 suffix as the field names accordingly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -91,12 +91,12 @@ update the <em>searching</em> and <em>ordering</em> field data with the actual d
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>force_insert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Force <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> query.</p></li>
+<li><p><strong>force_insert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Force <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> query.</p></li>
 <li><p><strong>only</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Only save the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code> instances.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Number of rows modified.</p>
@@ -145,7 +145,7 @@ if current data model supports and/or enables <a class="reference external" href
 processing integration.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.model.Metadata.datatables">
-<code class="sig-name descname">datatables</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#flask_datatables.model.Metadata.datatables" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">datatables</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></em><em class="property"> = False</em><a class="headerlink" href="#flask_datatables.model.Metadata.datatables" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration indicator flag.</p>
 </dd></dl>
 

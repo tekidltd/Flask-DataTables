@@ -50,25 +50,25 @@ with <a class="reference external" href="https://datatables.net/">DataTables</a>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>orderable</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Optional[Union[bool, peewee.Field]]: <a class="reference external" href="https://datatables.net/">DataTables</a> orderable field.</p></li>
-<li><p><strong>searchable</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Optional[Union[bool, peewee.Field]]: <a class="reference external" href="https://datatables.net/">DataTables</a> searchable field.</p></li>
+<li><p><strong>orderable</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Optional[Union[bool, peewee.Field]]: <a class="reference external" href="https://datatables.net/">DataTables</a> orderable field.</p></li>
+<li><p><strong>searchable</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Optional[Union[bool, peewee.Field]]: <a class="reference external" href="https://datatables.net/">DataTables</a> searchable field.</p></li>
 <li><p><strong>**kwargs</strong> – Arbitrary arguments accepted by <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.Field</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
-<p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> value, it indicates if the
+<p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a> value, it indicates if the
 field supports <a class="reference external" href="https://datatables.net/">DataTables</a> ordering and/or searching:</p>
 <ul>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> means the field is orderable and/or searchable, and it will refer to
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a> means the field is orderable and/or searchable, and it will refer to
 its properties <a class="reference internal" href="#flask_datatables.fields.Field.dt_orderable" title="flask_datatables.fields.Field.dt_orderable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dt_orderable</span></code></a> and/or
 <a class="reference internal" href="#flask_datatables.fields.Field.dt_searchable" title="flask_datatables.fields.Field.dt_searchable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dt_searchable</span></code></a> as its default field instance;</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the property returns <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>, then the field is orderable and/or searchable
+<p>If the property returns <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>, then the field is orderable and/or searchable
 by itself with its own values.</p>
 </div>
 </li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a> disables ordering and searching on the field;</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a> disables ordering and searching on the field;</p></li>
 <li><p>an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.Field</span></code> indicates that the current field is orderable
 and/or searchable through the given field instance.</p></li>
 </ul>
@@ -77,18 +77,18 @@ and/or searchable through the given field instance.</p></li>
 <p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.Field</span></code>, then
 its attributes <a class="reference internal" href="#flask_datatables.fields.Field.orderable" title="flask_datatables.fields.Field.orderable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">orderable</span></code></a> and/or
 <a class="reference internal" href="#flask_datatables.fields.Field.searchable" title="flask_datatables.fields.Field.searchable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">searchable</span></code></a> will be the corresponding instance.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>, then it refers to its properties
+<p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>, then it refers to its properties
 <a class="reference internal" href="#flask_datatables.fields.Field.dt_orderable" title="flask_datatables.fields.Field.dt_orderable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dt_orderable</span></code></a> and/or
 <a class="reference internal" href="#flask_datatables.fields.Field.dt_searchable" title="flask_datatables.fields.Field.dt_searchable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dt_searchable</span></code></a> as the actual value:</p>
 <ul class="simple">
 <li><p>if the properties return an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.Field</span></code>, then the attributes will
 be the returned instance; i.e. the field is orderable and/or searchable by converting to
 the target field instead of itself;</p></li>
-<li><p>if the properties return <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>, then the attributes will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>; i.e.
+<li><p>if the properties return <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">None</span></code></a>, then the attributes will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">True</span></code></a>; i.e.
 the field is orderable and/or searchable by itself with its value.</p></li>
 </ul>
-<p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, then the attributes will be
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a> as well.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">orderable</span></code> and/or <code class="docutils literal notranslate"><span class="pre">searchable</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a>, then the attributes will be
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">False</span></code></a> as well.</p>
 </div>
 <dl class="py method">
 <dt id="flask_datatables.fields.Field.dt_order">
@@ -148,13 +148,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.Field.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.Field.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.Field.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.Field.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.Field.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.Field.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -167,13 +167,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.AutoField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.AutoField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.AutoField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.AutoField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.AutoField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.AutoField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.AutoField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -186,13 +186,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.BareField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BareField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BareField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BareField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BareField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BareField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BareField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -205,13 +205,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.BigAutoField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BigAutoField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigAutoField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigAutoField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BigAutoField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigAutoField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigAutoField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -224,13 +224,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.BigBitField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BigBitField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigBitField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigBitField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BigBitField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigBitField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigBitField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -243,13 +243,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.BigIntegerField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BigIntegerField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigIntegerField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigIntegerField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BigIntegerField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigIntegerField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BigIntegerField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -269,7 +269,7 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd class="field-odd"><p><strong>value</strong> (<em>UUID</em>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -290,13 +290,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BinaryUUIDField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BinaryUUIDField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BinaryUUIDField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BinaryUUIDField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BinaryUUIDField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BinaryUUIDField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -309,13 +309,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.BitField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BitField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BitField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BitField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BitField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BitField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BitField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -328,13 +328,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.BlobField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BlobField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BlobField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BlobField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BlobField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BlobField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BlobField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -351,10 +351,10 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd><p>Convert value for <a class="reference external" href="https://datatables.net/">DataTables</a> searching operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Source value.</p>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -375,13 +375,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BooleanField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BooleanField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BooleanField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.BooleanField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BooleanField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.BooleanField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -394,13 +394,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.CharField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.CharField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.CharField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.CharField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.CharField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.CharField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.CharField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -413,13 +413,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.DateField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DateField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DateField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -432,13 +432,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.DateTimeField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DateTimeField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateTimeField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateTimeField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DateTimeField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateTimeField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DateTimeField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -458,7 +458,7 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd class="field-odd"><p><strong>value</strong> (<em>Decimal</em>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -479,13 +479,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DecimalField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DecimalField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DecimalField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DecimalField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DecimalField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DecimalField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -498,13 +498,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.DoubleField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DoubleField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DoubleField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DoubleField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.DoubleField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DoubleField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.DoubleField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -517,13 +517,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.FixedCharField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.FixedCharField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FixedCharField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FixedCharField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.FixedCharField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FixedCharField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FixedCharField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -540,10 +540,10 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd><p>Convert value for <a class="reference external" href="https://datatables.net/">DataTables</a> searching operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Source value.</p>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -564,13 +564,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.FloatField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FloatField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FloatField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.FloatField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FloatField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.FloatField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -583,13 +583,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.ForeignKeyField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.ForeignKeyField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ForeignKeyField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ForeignKeyField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.ForeignKeyField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ForeignKeyField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ForeignKeyField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -602,13 +602,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.IdentityField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.IdentityField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IdentityField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IdentityField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.IdentityField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IdentityField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IdentityField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -625,10 +625,10 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd><p>Convert value for <a class="reference external" href="https://datatables.net/">DataTables</a> searching operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Source value.</p>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -649,13 +649,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.IntegerField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IntegerField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IntegerField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.IntegerField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IntegerField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IntegerField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -672,10 +672,10 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd><p>Convert value for <a class="reference external" href="https://datatables.net/">DataTables</a> searching operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Source value.</p>
+<dd class="field-odd"><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -685,13 +685,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.IPField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IPField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IPField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.IPField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IPField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.IPField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -704,13 +704,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.ManyToManyField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.ManyToManyField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ManyToManyField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ManyToManyField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.ManyToManyField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ManyToManyField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.ManyToManyField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -723,13 +723,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.PrimaryKeyField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.PrimaryKeyField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.PrimaryKeyField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.PrimaryKeyField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.PrimaryKeyField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.PrimaryKeyField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.PrimaryKeyField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -742,13 +742,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.SmallIntegerField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.SmallIntegerField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.SmallIntegerField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.SmallIntegerField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.SmallIntegerField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.SmallIntegerField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.SmallIntegerField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -761,13 +761,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.TextField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.TextField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TextField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TextField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.TextField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TextField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TextField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -780,13 +780,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <p>Extending <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.TimeField</span></code>.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.fields.TimeField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimeField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimeField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.TimeField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimeField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimeField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -806,7 +806,7 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd class="field-odd"><p><strong>value</strong> (<em>datetime</em>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -816,13 +816,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.TimestampField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimestampField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimestampField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.TimestampField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimestampField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.TimestampField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
@@ -842,7 +842,7 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 <dd class="field-odd"><p><strong>value</strong> (<em>UUID</em>) – Source value.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Converted value.</p>
@@ -863,13 +863,13 @@ the field is orderable and/or searchable by itself with its value.</p></li>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.UUIDField.orderable">
-<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.UUIDField.orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">orderable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.UUIDField.orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration orderable flag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.fields.UUIDField.searchable">
-<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.UUIDField.searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">searchable</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">, </span><a class="reference internal" href="#flask_datatables.fields.Field" title="flask_datatables.fields.Field">Field</a><span class="p">]</span></em><a class="headerlink" href="#flask_datatables.fields.UUIDField.searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> integration searchable flag.</p>
 </dd></dl>
 
