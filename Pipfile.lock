@@ -331,11 +331,11 @@
         },
         "ipython": {
             "hashes": [
-                "sha256:570b813470ffd4b807ec84103844a18fe9558b5e3c096d8774c2364707fbda00",
-                "sha256:72d45dc63bdd630c36d07259e9d9572b391229a0686ff2349e00c67fadd276e3"
+                "sha256:9a08b46fc4b90b2159c8b2d3c2ea32f5bf6f98e3ed5256b62ac91b2f76ebc362",
+                "sha256:e49fb9a52bf13076930fdf484506567070f4afae1e050064b882dfef866458a8"
             ],
             "index": "tuna",
-            "version": "==8.0.0a1"
+            "version": "==8.0.0b1"
         },
         "isort": {
             "hashes": [
@@ -590,11 +590,11 @@
         },
         "platformdirs": {
             "hashes": [
-                "sha256:367a5e80b3d04d2428ffa76d33f124cf11e8fff2acdaa9b43d545f5c7d661ef2",
-                "sha256:8868bbe3c3c80d42f20156f22e7131d2fb321f5bc86a2a345375c6481a67021d"
+                "sha256:1d7385c7db91728b83efd0ca99a5afb296cab9d0ed8313a45ed8ba17967ecfca",
+                "sha256:440633ddfebcc36264232365d7840a970e75e1018d15b4327d11f91909045fda"
             ],
-            "markers": "python_version >= '3.6'",
-            "version": "==2.4.0"
+            "markers": "python_version >= '3.7'",
+            "version": "==2.4.1"
         },
         "prompt-toolkit": {
             "hashes": [
