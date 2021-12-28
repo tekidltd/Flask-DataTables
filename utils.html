@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Utilities &amp; Auxiliaries &#8212; Flask-DataTables 0.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -52,7 +52,7 @@ from the URL</p></li>
 <code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">render_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_name_or_list</span></em>, <em class="sig-param"><span class="n">macro</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">context</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#render_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.render_macro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates and renders a <strong>macro</strong> from the template.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>template_name_or_list</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>]</em>) – The name of the template to be rendered, or an iterable with template names
 the first one existing will be rendered.</p></li>
@@ -60,13 +60,13 @@ the first one existing will be rendered.</p></li>
 <li><p><strong>context</strong> (<em>Any</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Keyword Arguments</dt>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>**context</strong> – The variables that should be available in the context of the template.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The rendered macro.</p>
 </dd>
 </dl>
@@ -81,20 +81,20 @@ render HTML response blocks. The Jinja templates should have <strong>macro</stro
 for each target field named after <code class="docutils literal notranslate"><span class="pre">render_{field_name}</span></code> and takes only one
 argument <code class="docutils literal notranslate"><span class="pre">record</span></code> as the selected data model record.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>template</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>]</em>) – Path to the macro template.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Callable[[<a class="reference internal" href="model.html#flask_datatables.model.Model" title="flask_datatables.model.Model">Model</a>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData">ObjectData</a>]</p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Prepared response object data.</p>
 </dd>
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>See <a class="reference internal" href="#flask_datatables.utils.render_macro" title="flask_datatables.utils.render_macro"><code class="xref py py-func docutils literal notranslate"><span class="pre">flask_datatables.utils.render_macro()</span></code></a> for more information.</p>
-</div>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -102,14 +102,14 @@ argument <code class="docutils literal notranslate"><span class="pre">record</sp
 <code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">parse_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#parse_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.parse_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">flask.request.args</span></code></a> as <code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>args</strong> (<em>Optional</em><em>[</em><em>ImmutableMultiDict</em><em>]</em>) – Original request arguments. The default value is inferred from
 <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request.args</span></code></a>.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query">Query</a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Parsed query dictionary.</p>
 </dd>
 </dl>

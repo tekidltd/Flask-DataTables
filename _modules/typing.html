@@ -128,7 +128,7 @@
     <span class="s1">&#39;NamedTuple&#39;</span><span class="p">,</span>  <span class="c1"># Not really a type.</span>
     <span class="s1">&#39;TypedDict&#39;</span><span class="p">,</span>  <span class="c1"># Not really a type.</span>
     <span class="s1">&#39;Generator&#39;</span><span class="p">,</span>
- 
+
     <span class="c1"># Other concrete types.</span>
     <span class="s1">&#39;BinaryIO&#39;</span><span class="p">,</span>
     <span class="s1">&#39;IO&#39;</span><span class="p">,</span>
@@ -167,7 +167,7 @@
     <span class="k">return</span> <span class="n">arg</span>
 
 
-<span class="k">def</span> <span class="nf">_type_check</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_type_check</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">is_class</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Check that the argument is a type, and return it (internal helper).</span>
 
 <span class="sd">    As a special case, accept None and return type(None) instead. Also wrap strings</span>
@@ -180,14 +180,16 @@
 <span class="sd">    We append the repr() of the actual value (truncated to 100 chars).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">invalid_generic_forms</span> <span class="o">=</span> <span class="p">(</span><span class="n">Generic</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">is_argument</span><span class="p">:</span>
-        <span class="n">invalid_generic_forms</span> <span class="o">=</span> <span class="n">invalid_generic_forms</span> <span class="o">+</span> <span class="p">(</span><span class="n">ClassVar</span><span class="p">,</span> <span class="n">Final</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_class</span><span class="p">:</span>
+        <span class="n">invalid_generic_forms</span> <span class="o">+=</span> <span class="p">(</span><span class="n">ClassVar</span><span class="p">,)</span>
+        <span class="k">if</span> <span class="n">is_argument</span><span class="p">:</span>
+            <span class="n">invalid_generic_forms</span> <span class="o">+=</span> <span class="p">(</span><span class="n">Final</span><span class="p">,)</span>
 
     <span class="n">arg</span> <span class="o">=</span> <span class="n">_type_convert</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="n">module</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">_GenericAlias</span><span class="p">)</span> <span class="ow">and</span>
             <span class="n">arg</span><span class="o">.</span><span class="n">__origin__</span> <span class="ow">in</span> <span class="n">invalid_generic_forms</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> is not valid as type argument&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Any</span><span class="p">,</span> <span class="n">NoReturn</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Any</span><span class="p">,</span> <span class="n">NoReturn</span><span class="p">,</span> <span class="n">Final</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">arg</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">_SpecialForm</span><span class="p">)</span> <span class="ow">or</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">Generic</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plain </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2"> is not valid as type argument&quot;</span><span class="p">)</span>
@@ -386,9 +388,10 @@
 
 
 <span class="k">class</span> <span class="nc">_LiteralSpecialForm</span><span class="p">(</span><span class="n">_SpecialForm</span><span class="p">,</span> <span class="n">_root</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="nd">@_tp_cache</span><span class="p">(</span><span class="n">typed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">parameters</span><span class="p">,)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">)</span>
 
 
 <span class="nd">@_SpecialForm</span>
@@ -509,7 +512,8 @@
     <span class="k">return</span> <span class="n">Union</span><span class="p">[</span><span class="n">arg</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
 
 <span class="nd">@_LiteralSpecialForm</span>
-<span class="k">def</span> <span class="nf">Literal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="nd">@_tp_cache</span><span class="p">(</span><span class="n">typed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">Literal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Special typing form to define literal types (a.k.a. value types).</span>
 
 <span class="sd">    This form can be used to indicate to type checkers that the corresponding</span>
@@ -532,9 +536,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># There is no &#39;_type_check&#39; call because arguments to Literal[...] are</span>
     <span class="c1"># values, not types.</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="n">parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">parameters</span><span class="p">,)</span>
-
     <span class="n">parameters</span> <span class="o">=</span> <span class="n">_flatten_literal_params</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -550,9 +551,10 @@
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;__forward_arg__&#39;</span><span class="p">,</span> <span class="s1">&#39;__forward_code__&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;__forward_evaluated__&#39;</span><span class="p">,</span> <span class="s1">&#39;__forward_value__&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;__forward_is_argument__&#39;</span><span class="p">,</span> <span class="s1">&#39;__forward_module__&#39;</span><span class="p">)</span>
+                 <span class="s1">&#39;__forward_is_argument__&#39;</span><span class="p">,</span> <span class="s1">&#39;__forward_is_class__&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;__forward_module__&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">is_class</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Forward reference must be a string -- got </span><span class="si">{</span><span class="n">arg</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -564,6 +566,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__forward_evaluated__</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__forward_value__</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__forward_is_argument__</span> <span class="o">=</span> <span class="n">is_argument</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__forward_is_class__</span> <span class="o">=</span> <span class="n">is_class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__forward_module__</span> <span class="o">=</span> <span class="n">module</span>
 
     <span class="k">def</span> <span class="nf">_evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">globalns</span><span class="p">,</span> <span class="n">localns</span><span class="p">,</span> <span class="n">recursive_guard</span><span class="p">):</span>
@@ -580,10 +583,11 @@
                 <span class="n">globalns</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
                     <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__forward_module__</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="n">globalns</span>
                 <span class="p">)</span>
-            <span class="n">type_</span> <span class="o">=</span><span class="n">_type_check</span><span class="p">(</span>
+            <span class="n">type_</span> <span class="o">=</span> <span class="n">_type_check</span><span class="p">(</span>
                 <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__forward_code__</span><span class="p">,</span> <span class="n">globalns</span><span class="p">,</span> <span class="n">localns</span><span class="p">),</span>
                 <span class="s2">&quot;Forward references must evaluate to types.&quot;</span><span class="p">,</span>
                 <span class="n">is_argument</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__forward_is_argument__</span><span class="p">,</span>
+                <span class="n">is_class</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__forward_is_class__</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__forward_value__</span> <span class="o">=</span> <span class="n">_eval_type</span><span class="p">(</span>
                 <span class="n">type_</span><span class="p">,</span> <span class="n">globalns</span><span class="p">,</span> <span class="n">localns</span><span class="p">,</span> <span class="n">recursive_guard</span> <span class="o">|</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__forward_arg__</span><span class="p">}</span>
@@ -1112,8 +1116,34 @@
     <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">_get_protocol_attrs</span><span class="p">(</span><span class="bp">cls</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">_no_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Protocols cannot be instantiated&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_no_init_or_replace_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_protocol</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Protocols cannot be instantiated&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Already using a custom `__init__`. No need to calculate correct</span>
+    <span class="c1"># `__init__` to call. This can lead to RecursionError. See bpo-45121.</span>
+    <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">_no_init_or_replace_init</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Initially, `__init__` of a protocol subclass is set to `_no_init_or_replace_init`.</span>
+    <span class="c1"># The first instantiation of the subclass will call `_no_init_or_replace_init` which</span>
+    <span class="c1"># searches for a proper new `__init__` in the MRO. The new `__init__`</span>
+    <span class="c1"># replaces the subclass&#39; old `__init__` (ie `_no_init_or_replace_init`). Subsequent</span>
+    <span class="c1"># instantiation of the protocol subclass will thus use the new</span>
+    <span class="c1"># `__init__` and no longer call `_no_init_or_replace_init`.</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">:</span>
+        <span class="n">init</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="n">_no_init_or_replace_init</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">init</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">_no_init_or_replace_init</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">init</span>
+            <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># should not happen</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__init__</span>
+
+    <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
 
 
 <span class="k">def</span> <span class="nf">_allow_reckless_class_cheks</span><span class="p">():</span>
@@ -1242,15 +1272,6 @@
 
         <span class="c1"># We have nothing more to do for non-protocols...</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_protocol</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">==</span> <span class="n">_no_init</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">:</span>
-                    <span class="n">init</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="n">_no_init</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">init</span> <span class="o">!=</span> <span class="n">_no_init</span><span class="p">:</span>
-                        <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">init</span>
-                        <span class="k">break</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># should not happen</span>
-                    <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__init__</span>
             <span class="k">return</span>
 
         <span class="c1"># ... otherwise check consistency of bases, and prohibit instantiation.</span>
@@ -1261,7 +1282,7 @@
                     <span class="nb">issubclass</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">Generic</span><span class="p">)</span> <span class="ow">and</span> <span class="n">base</span><span class="o">.</span><span class="n">_is_protocol</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Protocols can only inherit from other&#39;</span>
                                 <span class="s1">&#39; protocols, got </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">base</span><span class="p">)</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">_no_init</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">_no_init_or_replace_init</span>
 
 
 <span class="k">class</span> <span class="nc">_AnnotatedAlias</span><span class="p">(</span><span class="n">_GenericAlias</span><span class="p">,</span> <span class="n">_root</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -1466,7 +1487,7 @@
                 <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">value</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                    <span class="n">value</span> <span class="o">=</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">is_argument</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">is_class</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">_eval_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">base_globals</span><span class="p">,</span> <span class="n">localns</span><span class="p">)</span>
                 <span class="n">hints</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">return</span> <span class="n">hints</span> <span class="k">if</span> <span class="n">include_extras</span> <span class="k">else</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">_strip_annotations</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">hints</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
@@ -1498,7 +1519,13 @@
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="c1"># class-level forward refs were handled above, this must be either</span>
+            <span class="c1"># a module-level annotation or a function argument annotation</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">ForwardRef</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span>
+                <span class="n">is_argument</span><span class="o">=</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">),</span>
+                <span class="n">is_class</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">_eval_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">globalns</span><span class="p">,</span> <span class="n">localns</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">defaults</span> <span class="ow">and</span> <span class="n">defaults</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">Optional</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>

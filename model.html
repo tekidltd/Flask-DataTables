@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Base Model &#8212; Flask-DataTables 0.1.2 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -50,13 +50,13 @@ processing its field data, we added the following two attributes to save
 the <a class="reference external" href="https://datatables.net/">DataTables</a> integrated fields data.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.model.Model.dt_orderable">
-<code class="sig-name descname">dt_orderable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.4)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_orderable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dt_orderable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.8)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_orderable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> orderable fields.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="flask_datatables.model.Model.dt_searchable">
-<code class="sig-name descname">dt_searchable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.4)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_searchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dt_searchable</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/api.html#Field" title="(in peewee v3.14.8)">Field</a><span class="p">]</span></em><em class="property"> = {}</em><a class="headerlink" href="#flask_datatables.model.Model.dt_searchable" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://datatables.net/">DataTables</a> searchable fields.</p>
 </dd></dl>
 
@@ -76,7 +76,7 @@ an instance of a <code class="xref py py-class docutils literal notranslate"><sp
 additional fields of such type with <code class="docutils literal notranslate"><span class="pre">_dt_order</span></code> and/or <code class="docutils literal notranslate"><span class="pre">_dt_search</span></code>
 suffix as the field names accordingly.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
@@ -89,16 +89,16 @@ suffix as the field names accordingly.</p>
 <p>The method extends the original <code class="xref py py-meth docutils literal notranslate"><span class="pre">peewee.Model.save()</span></code> method by automatically
 update the <em>searching</em> and <em>ordering</em> field data with the actual data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>force_insert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Force <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> query.</p></li>
 <li><p><strong>only</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><em>Field</em></a><em>]</em><em>]</em>) – Only save the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code> instances.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Number of rows modified.</p>
 </dd>
 </dl>
@@ -109,16 +109,16 @@ update the <em>searching</em> and <em>ordering</em> field data with the actual d
 <em class="property">classmethod </em><code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">factory</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/model.html#Model.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.model.Model.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Server-side processing integration with <a class="reference external" href="https://datatables.net/">DataTables</a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>query</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query"><em>Query</em></a><em>]</em>) – Query parameters sent from the client-side.</p></li>
 <li><p><strong>factory</strong> (<em>Optional</em><em>[</em><em>Factory</em><em>]</em>) – Factory function to prepare the server-side data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Response" title="flask_datatables.typing.Response">Response</a></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Selected information from the database in format to
 be sent to <a class="reference external" href="https://datatables.net/">DataTables</a>.</p>
 </dd>
@@ -129,14 +129,14 @@ be sent to <a class="reference external" href="https://datatables.net/">DataTabl
 record returned from <code class="xref py py-mod docutils literal notranslate"><span class="pre">peewee</span></code> selection, and returns
 the converted data of fields. See
 <a class="reference internal" href="utils.html#flask_datatables.utils.prepare_response" title="flask_datatables.utils.prepare_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">flask_datatables.utils.prepare_response()</span></code></a> for an example.</p>
-</div>
+</aside>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="flask_datatables.model.Metadata">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.model.</code><code class="sig-name descname">Metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">database</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indexes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">primary_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">only_save_dirty</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">depends_on</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">db_table</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_settings</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">without_rowid</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">temporary</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">legacy_table_names</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/model.html#Metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.model.Metadata" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.model.</code><code class="sig-name descname">Metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em>, <em class="sig-param"><span class="n">database</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indexes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">primary_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">only_save_dirty</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">depends_on</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">db_table</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_settings</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">without_rowid</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">temporary</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">strict_tables</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legacy_table_names</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/model.html#Metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.model.Metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">peewee.Metadata</span></code></p>
 <p>Basic metadata for data models.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> extends the original metadata record from <code class="xref py py-mod docutils literal notranslate"><span class="pre">peewee</span></code>
