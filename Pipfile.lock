@@ -236,11 +236,11 @@
         },
         "charset-normalizer": {
             "hashes": [
-                "sha256:1eecaa09422db5be9e29d7fc65664e6c33bd06f9ced7838578ba40d58bdf3721",
-                "sha256:b0b883e8e874edfdece9c28f314e3dd5badf067342e42fb162203335ae61aa2c"
+                "sha256:876d180e9d7432c5d1dfd4c5d26b72f099d503e8fcc0feb7532c9289be60fcbd",
+                "sha256:cb957888737fc0bbcd78e3df769addb41fd1ff8cf950dc9e7ad7793f1bf44455"
             ],
             "markers": "python_version >= '3'",
-            "version": "==2.0.9"
+            "version": "==2.0.10"
         },
         "click": {
             "hashes": [
@@ -331,18 +331,18 @@
         },
         "ipython": {
             "hashes": [
-                "sha256:9a08b46fc4b90b2159c8b2d3c2ea32f5bf6f98e3ed5256b62ac91b2f76ebc362",
-                "sha256:e49fb9a52bf13076930fdf484506567070f4afae1e050064b882dfef866458a8"
+                "sha256:837a5ad32e2c91661ce992f096004d425d9f60543dd1fe6db02e073a8cbdbfb3",
+                "sha256:e12b8c8673a968d72c2ab340727c7b7340979bcf8b848dbfefe781680a46d0b4"
             ],
             "index": "tuna",
-            "version": "==8.0.0b1"
+            "version": "==8.0.0rc1"
         },
         "isort": {
             "hashes": [
                 "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7",
                 "sha256:e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"
             ],
-            "markers": "python_version < '4' and python_full_version >= '3.6.1'",
+            "markers": "python_version < '4.0' and python_full_version >= '3.6.1'",
             "version": "==5.10.1"
         },
         "itsdangerous": {
@@ -760,11 +760,11 @@
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
-                "sha256:58a5be039667d71321330b6bb2636d7e80770f6aa1c1626f81c35dbfe86c4266",
-                "sha256:d472f78877ad3cb05c9335dc4a203055a8247a47468b26ab231654857d6d4665"
+                "sha256:4edf1914cedcaf7d573ee441850999a8f5b5862b72f59e3c207b4ec22a28f955",
+                "sha256:cff26fb3425550d8c8c9ae0426e5e29cba8e92505710c1f6d397b86cf20f034f"
             ],
             "index": "tuna",
-            "version": "==1.13.0"
+            "version": "==1.13.1"
         },
         "sphinxcontrib-applehelp": {
             "hashes": [
@@ -866,7 +866,7 @@
                 "sha256:4987c65554f7a2dbf30c18fd48778ef124af6fab771a377103da0585e2336ece",
                 "sha256:c4fdf4019605b6e5423637e01bc9fe4daef873709a7973e195ceba0a62bbc844"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4.0'",
             "version": "==1.26.7"
         },
         "wcwidth": {
