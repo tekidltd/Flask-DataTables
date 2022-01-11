@@ -307,11 +307,11 @@
         },
         "gitpython": {
             "hashes": [
-                "sha256:4f8b0e51713642b83f1eb10136d36a7f2c5278d188c5ae82b144cb1f4e848f0c",
-                "sha256:b923e8952c2fe0d70b129fddd8511acc90b3070c8dddb20d86ca9911a5d0c248"
+                "sha256:26ac35c212d1f7b16036361ca5cff3ec66e11753a0d677fb6c48fa4e1a9dd8d6",
+                "sha256:fc8868f63a2e6d268fb25f481995ba185a85a66fcad126f039323ff6635669ee"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==3.1.25"
+            "version": "==3.1.26"
         },
         "idna": {
             "hashes": [
@@ -760,11 +760,11 @@
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
-                "sha256:477302d72565c907756c16e907daa6ad7ad78ac7574a18c0eae9f493158c220c",
-                "sha256:47bd87c2d99173e20c44d5604917ff890bb2d2e77174d952b061dcfaa99f0b7d"
+                "sha256:1480d4af8ac465aa87b793e22bb0feb4578b9c93b36e01b35c983bd6f596326f",
+                "sha256:bd6b70b93fc53d63a167738ba4fb40643ef7eb9b8d915a886c372949981b8eac"
             ],
             "index": "tuna",
-            "version": "==1.15.1"
+            "version": "==1.15.2"
         },
         "sphinxcontrib-applehelp": {
             "hashes": [
