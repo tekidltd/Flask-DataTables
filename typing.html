@@ -44,8 +44,8 @@ the server, it expects JSON data to be returned to it, with the parameters set
 as described in <a class="reference internal" href="#flask_datatables.typing.Response" title="flask_datatables.typing.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a>.</p>
 <dl class="py class">
 <dt id="flask_datatables.typing.Column">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Column</code><a class="reference internal" href="_modules/flask_datatables/typing.html#Column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Column" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Column</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_typename</span></em>, <em class="sig-param"><span class="n">_fields</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/typing.html#Column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>Column data.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.typing.Column.data">
@@ -83,8 +83,8 @@ not (<a class="reference external" href="https://docs.python.org/3/library/const
 
 <dl class="py class">
 <dt id="flask_datatables.typing.ObjectData">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">ObjectData</code><a class="reference internal" href="_modules/flask_datatables/typing.html#ObjectData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.ObjectData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">ObjectData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_typename</span></em>, <em class="sig-param"><span class="n">_fields</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/typing.html#ObjectData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.ObjectData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>Server-side processing return using objects.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.typing.ObjectData.DT_RowAttr">
@@ -120,8 +120,8 @@ for later retrieval (for example on a click event).</p>
 
 <dl class="py class">
 <dt id="flask_datatables.typing.Order">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Order</code><a class="reference internal" href="_modules/flask_datatables/typing.html#Order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Order" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_typename</span></em>, <em class="sig-param"><span class="n">_fields</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/typing.html#Order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>Ordering information.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.typing.Order.column">
@@ -143,8 +143,8 @@ respectively.</p>
 
 <dl class="py class">
 <dt id="flask_datatables.typing.Query">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Query</code><a class="reference internal" href="_modules/flask_datatables/typing.html#Query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Query" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Query</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_typename</span></em>, <em class="sig-param"><span class="n">_fields</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/typing.html#Query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>Sent parameters.</p>
 <p>When making a request to the server using server-side processing,
 DataTables will send the following data in order to let the server
@@ -201,8 +201,8 @@ point in the current data set (0 index based - i.e.
 
 <dl class="py class">
 <dt id="flask_datatables.typing.Response">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Response</code><a class="reference internal" href="_modules/flask_datatables/typing.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Response" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_typename</span></em>, <em class="sig-param"><span class="n">_fields</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/typing.html#Response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>Returned data.</p>
 <p>Once DataTables has made a request for data, with the above
 parameters sent to the server, it expects JSON data to be
@@ -261,8 +261,8 @@ records in the database)</p>
 
 <dl class="py class">
 <dt id="flask_datatables.typing.Search">
-<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Search</code><a class="reference internal" href="_modules/flask_datatables/typing.html#Search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Search" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">flask_datatables.typing.</code><code class="sig-name descname">Search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_typename</span></em>, <em class="sig-param"><span class="n">_fields</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">/</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/typing.html#Search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.typing.Search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 <p>Search information.</p>
 <dl class="py attribute">
 <dt id="flask_datatables.typing.Search.regex">
