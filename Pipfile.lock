@@ -682,11 +682,11 @@
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
-                "sha256:081daf53077b4ae1c28347d6d858e13e63aefe3b4aacef79fd717dd60687b470",
-                "sha256:51c7b3f5cb9ccd15d0b52088c62df3094f1abd9612930340365c26def8629a14"
+                "sha256:844d7237d3f6280b0416f5375d9556cfd84df1945356fcc34b82e8aaacab40f3",
+                "sha256:f16491cad05a13f4825ecdf9ee4ff02925d9a3b1cf103d4d02f2f81802cce653"
             ],
             "index": "tuna",
-            "version": "==1.17.0"
+            "version": "==1.17.1"
         },
         "sphinxcontrib-applehelp": {
             "hashes": [
