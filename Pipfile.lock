@@ -636,11 +636,11 @@
         },
         "rstcheck": {
             "hashes": [
-                "sha256:30c36768c4bd617a85ab93c31facaf410582e53803fde624845eb00c1430070c",
-                "sha256:d4b035300b7d898403544f38c3a4980171ce85f487d25e188347bbafb6ee58c0"
+                "sha256:56334dbf990bde0d9ef82fa3b0cf317e99ef4fc59525fa0e22d3b9a0be55b5f3",
+                "sha256:f656cb2097c4559af13ed4861e68f2190497531cbcaa4d96e994c0591131fa1e"
             ],
             "index": "tuna",
-            "version": "==3.5.0"
+            "version": "==4.0.0"
         },
         "setuptools": {
             "hashes": [
@@ -775,6 +775,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==5.1.1"
+        },
+        "types-docutils": {
+            "hashes": [
+                "sha256:cff2c126a6590f0d92a3ff904bd781683d149831c0352189bd1e8543e4b85949",
+                "sha256:e887c8e8c03a03850d09f1a6c4ed4983a65b9bfa512eee27268c90cdc9243411"
+            ],
+            "version": "==0.18.1"
         },
         "typing-extensions": {
             "hashes": [
