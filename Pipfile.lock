@@ -636,11 +636,11 @@
         },
         "rstcheck": {
             "hashes": [
-                "sha256:56334dbf990bde0d9ef82fa3b0cf317e99ef4fc59525fa0e22d3b9a0be55b5f3",
-                "sha256:f656cb2097c4559af13ed4861e68f2190497531cbcaa4d96e994c0591131fa1e"
+                "sha256:8fba7f864e3fc09e3a6eac640a809cac89838f72eb1845ef21b37b13f71e7421",
+                "sha256:c0c4e44ebb630a7f1ff61d8fc26adc7d49c16fcd4ba85e3ea5542b864cf982e4"
             ],
             "index": "tuna",
-            "version": "==4.0.0"
+            "version": "==5.0.0"
         },
         "setuptools": {
             "hashes": [
@@ -778,10 +778,10 @@
         },
         "types-docutils": {
             "hashes": [
-                "sha256:cff2c126a6590f0d92a3ff904bd781683d149831c0352189bd1e8543e4b85949",
-                "sha256:e887c8e8c03a03850d09f1a6c4ed4983a65b9bfa512eee27268c90cdc9243411"
+                "sha256:35aa0a9d40c150f96f59a5adcdafc0bb9927d6a421efbd0097374c673ad8d793",
+                "sha256:470700fdd29c1267cf3f1cefc1d1d88492d5d381a8e1c422e51f82e1d8b2762b"
             ],
-            "version": "==0.18.1"
+            "version": "==0.18.2"
         },
         "typing-extensions": {
             "hashes": [
