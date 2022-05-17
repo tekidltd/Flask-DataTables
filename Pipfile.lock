@@ -692,11 +692,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:5534570b9980fc650d45c62877ff603c7aaaf24893371708736cc016bd221c3c",
-                "sha256:ca6ba73b7fd5f734ae70ece8c4c1f7062b07f3352f6428f6277e27c8f5c64237"
+                "sha256:28c79c24d83c42a5e6d6cc711e5e9a6c1b89326229feaa5807fc277040658600",
+                "sha256:588ffd1dc6e20e9f4f7057aa9873fcdc26e0270362602735d32476bad67d82c5"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==62.2.0"
+            "version": "==62.3.1"
         },
         "shellingham": {
             "hashes": [
@@ -825,11 +825,11 @@
         },
         "traitlets": {
             "hashes": [
-                "sha256:60474f39bf1d39a11e0233090b99af3acee93bbc2281777e61dd8c87da8a0014",
-                "sha256:9dd4025123fbe018a2092b2ad6984792f53ea3362c698f37473258b1fa97b0bc"
+                "sha256:70815ecb20ec619d1af28910ade523383be13754283aef90528eb3d47b77c5db",
+                "sha256:f44b708d33d98b0addb40c29d148a761f44af740603a8fd0e2f8b5b27cf0f087"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==5.2.0"
+            "version": "==5.2.1.post0"
         },
         "typer": {
             "extras": [
