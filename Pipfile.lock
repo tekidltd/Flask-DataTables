@@ -685,11 +685,11 @@
         },
         "rstcheck": {
             "hashes": [
-                "sha256:3fdd7682a50f3808a4c91b6d0681fa2b8937f6969af16c38833cacecfe2b12aa",
-                "sha256:c480cf83b0d73a76eca85a2f6b43aa5445b412715370307f259918920a4b2978"
+                "sha256:351972f2f2bd99f820928acc6a0ccc02fc97b47a5bc66cdd35e1144bd3fb6539",
+                "sha256:6935103520ef5506e5c4b5539841d6abc54940a32a8b8c3409ac191cabdf582c"
             ],
             "index": "tuna",
-            "version": "==6.0.0a1"
+            "version": "==6.0.0a2"
         },
         "setuptools": {
             "hashes": [
