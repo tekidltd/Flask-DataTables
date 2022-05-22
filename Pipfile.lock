@@ -313,7 +313,7 @@
                 "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7",
                 "sha256:e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"
             ],
-            "markers": "python_version < '4' and python_full_version >= '3.6.1'",
+            "markers": "python_version < '4.0' and python_full_version >= '3.6.1'",
             "version": "==5.10.1"
         },
         "itsdangerous": {
@@ -685,11 +685,11 @@
         },
         "rstcheck": {
             "hashes": [
-                "sha256:351972f2f2bd99f820928acc6a0ccc02fc97b47a5bc66cdd35e1144bd3fb6539",
-                "sha256:6935103520ef5506e5c4b5539841d6abc54940a32a8b8c3409ac191cabdf582c"
+                "sha256:2ff85c55ca76d4859b21fd8e59896072127efa30fbd6a7bda885844a6b709156",
+                "sha256:912546dd37cd485724d8dfa29c90044de6f72c9f75e8b1d0d33600e102f695d9"
             ],
             "index": "tuna",
-            "version": "==6.0.0a2"
+            "version": "==6.0.0rc1"
         },
         "setuptools": {
             "hashes": [
@@ -863,7 +863,7 @@
                 "sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14",
                 "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4.0'",
             "version": "==1.26.9"
         },
         "wcwidth": {
