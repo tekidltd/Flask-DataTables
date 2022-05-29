@@ -302,11 +302,11 @@
         },
         "ipython": {
             "hashes": [
-                "sha256:341456643a764c28f670409bbd5d2518f9b82c013441084ff2c2fc999698f83b",
-                "sha256:807ae3cf43b84693c9272f70368440a9a7eaa2e7e6882dad943c32fbf7e51402"
+                "sha256:7ca74052a38fa25fe9bedf52da0be7d3fdd2fb027c3b778ea78dfe8c212937d1",
+                "sha256:f2db3a10254241d9b447232cec8b424847f338d9d36f9a577a6192c332a46abd"
             ],
             "index": "tuna",
-            "version": "==8.3.0"
+            "version": "==8.4.0"
         },
         "isort": {
             "hashes": [
@@ -685,11 +685,19 @@
         },
         "rstcheck": {
             "hashes": [
-                "sha256:49c8ef64abec3bb1c19b0112696ff04cfb7093c33ad987ded5d14d0568af8758",
-                "sha256:5fdbeb99246e2381eed4a51d48e21837dbeaa08e0f76aec9b61b5ffc91ddb97d"
+                "sha256:50969fa9b48238fe1245e62c33922222c7b4353671a50db6d5934752c6c37642",
+                "sha256:63f20c20058e8f0d4ece6215a0bcaf36157f9d4eb94119d62bd7b90a7f51166b"
             ],
             "index": "tuna",
-            "version": "==6.0.0rc2"
+            "version": "==6.0.0rc3"
+        },
+        "rstcheck-core": {
+            "hashes": [
+                "sha256:957097e36788954bfc58d7b0e474ba06e94edd83cbababf106c8b1264b5bd30b",
+                "sha256:d6aa74c1d6e5d232efd9e39484b99836f66e02f668b6ed171ea44881ff9965e8"
+            ],
+            "markers": "python_version >= '3.7' and python_version < '4'",
+            "version": "==1.0.0rc1"
         },
         "setuptools": {
             "hashes": [
