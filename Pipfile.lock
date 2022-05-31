@@ -693,11 +693,11 @@
         },
         "rstcheck-core": {
             "hashes": [
-                "sha256:4243e798f003b3db6627c42363af807e8b9b850612e5834f5c1ec100a68df240",
-                "sha256:58f9be9de2a97581fc464dcbf47849a0461ca0a3854b0493d340fd14cad1e351"
+                "sha256:6d75e858441644b9a0ad7a89a6c0a9012920be7dc4fad34f95579ae2a97a2d5e",
+                "sha256:b06bee11f3679b283cbd6abf707bfe4d5fd2cf480cfa3ffe6d5c9238c6d4ae89"
             ],
             "markers": "python_version >= '3.7' and python_version < '4.0'",
-            "version": "==1.0.0"
+            "version": "==1.0.2"
         },
         "setuptools": {
             "hashes": [
