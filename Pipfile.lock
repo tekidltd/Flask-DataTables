@@ -834,11 +834,11 @@
         },
         "traitlets": {
             "hashes": [
-                "sha256:70815ecb20ec619d1af28910ade523383be13754283aef90528eb3d47b77c5db",
-                "sha256:f44b708d33d98b0addb40c29d148a761f44af740603a8fd0e2f8b5b27cf0f087"
+                "sha256:678693c3e0a71c968cc80f959205a6e87350ea45e289906a8e356fb3e402ae19",
+                "sha256:c08a63e48d645734db27f153808fb35022f97a22becb6ed22171c03cc361a120"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==5.2.1.post0"
+            "version": "==5.3.0.dev0"
         },
         "typer": {
             "extras": [
