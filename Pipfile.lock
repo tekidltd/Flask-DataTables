@@ -701,11 +701,11 @@
         },
         "rstcheck": {
             "hashes": [
-                "sha256:50969fa9b48238fe1245e62c33922222c7b4353671a50db6d5934752c6c37642",
-                "sha256:63f20c20058e8f0d4ece6215a0bcaf36157f9d4eb94119d62bd7b90a7f51166b"
+                "sha256:144e6fb24042f1e4b0bb875a2238deddf7536894570ba4ac1abdd52b86980b2f",
+                "sha256:3536f87b02aee4c945d0fbcf4a2a3458341d95afc8e22fc2898bb897bbc2f5f6"
             ],
             "index": "tuna",
-            "version": "==6.0.0rc3"
+            "version": "==6.0.0"
         },
         "rstcheck-core": {
             "hashes": [
