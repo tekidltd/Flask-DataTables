@@ -869,11 +869,11 @@
                 "all"
             ],
             "hashes": [
-                "sha256:5646aef0d936b2c761a10393f0384ee6b5c7fe0bb3e5cd710b17134ca1d99cff",
-                "sha256:e8467f0ebac0c81366c2168d6ad9f888efdfb6d4e1d3d5b4a004f46fa444b5c3"
+                "sha256:023bae00d1baf358a6cc7cea45851639360bb716de687b42b0a4641cd99173f1",
+                "sha256:b8261c6c0152dd73478b5ba96ba677e5d6948c715c310f7c91079f311f62ec03"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==0.4.1"
+            "version": "==0.4.2"
         },
         "types-docutils": {
             "hashes": [
