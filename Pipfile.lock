@@ -717,11 +717,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:ca71b042399c2207a2672082b8a69d0a5777538eae1efd28006eea516e7fad8d",
-                "sha256:e887bc4f4f8056b458dce34a8af45a84bbd64970343f1cf35d6d57dd2af1bc64"
+                "sha256:16923d366ced322712c71ccb97164d07472abeecd13f3a6c283f6d5d26722793",
+                "sha256:db3b8e2f922b2a910a29804776c643ea609badb6a32c4bcc226fd4fd902cce65"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==63.0.0b1"
+            "version": "==63.1.0"
         },
         "shellingham": {
             "hashes": [
