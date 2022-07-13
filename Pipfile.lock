@@ -106,10 +106,10 @@
         },
         "peewee": {
             "hashes": [
-                "sha256:48eac70be812ac84daa5400fb8e7b545e0c83adcfa05c8e2a8612f9ced4da495"
+                "sha256:6d5db3babc33819ac326f1550e5a39677f4584094c567a7b88cc6bf7bcdcb687"
             ],
             "index": "tuna",
-            "version": "==3.15.0"
+            "version": "==3.15.1"
         },
         "typing-extensions": {
             "hashes": [
@@ -514,10 +514,10 @@
         },
         "peewee": {
             "hashes": [
-                "sha256:48eac70be812ac84daa5400fb8e7b545e0c83adcfa05c8e2a8612f9ced4da495"
+                "sha256:6d5db3babc33819ac326f1550e5a39677f4584094c567a7b88cc6bf7bcdcb687"
             ],
             "index": "tuna",
-            "version": "==3.15.0"
+            "version": "==3.15.1"
         },
         "pexpect": {
             "hashes": [
