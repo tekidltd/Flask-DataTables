@@ -154,10 +154,10 @@
         },
         "asttokens": {
             "hashes": [
-                "sha256:8444353e4e2a99661c8dfb85ec9c02eedded08f0006234bff7db44a06840acc2",
-                "sha256:f5589ef8518f73dd82c15e1c19f795d8a62c133485e557c04443d4a1a730cf9f"
+                "sha256:c61e16246ecfb2cde2958406b4c8ebc043c9e6d73aaa83c941673b35e5d3a76b",
+                "sha256:e3305297c744ae53ffa032c45dc347286165e4ffce6875dc662b205db0623d86"
             ],
-            "version": "==2.0.7"
+            "version": "==2.0.8"
         },
         "autopep8": {
             "hashes": [
@@ -220,6 +220,13 @@
                 "sha256:e6c6b4334fc50988a639d9b98aa429a0b57da6e17b9a44f0451f930b6967b7a4"
             ],
             "version": "==0.4.5"
+        },
+        "commonmark": {
+            "hashes": [
+                "sha256:452f9dc859be7f06631ddcb328b6919c67984aca654e5fefb3914d54691aed60",
+                "sha256:da2f38c92590f83de410ba1a3cbceafbc74fee9def35f9251ba9a971d6d66fd9"
+            ],
+            "version": "==0.9.1"
         },
         "decorator": {
             "hashes": [
@@ -700,13 +707,20 @@
             "markers": "python_version >= '3.7' and python_version < '4.0'",
             "version": "==2.28.1"
         },
+        "rich": {
+            "hashes": [
+                "sha256:2eb4e6894cde1e017976d2975ac210ef515d7548bc595ba20e195fb9628acdeb",
+                "sha256:63a5c5ce3673d3d5fbbf23cd87e11ab84b6b451436f1b7f19ec54b6bc36ed7ca"
+            ],
+            "version": "==12.5.1"
+        },
         "rstcheck": {
             "hashes": [
-                "sha256:2f69b972c682fbb6618e969273962f77c4307d6900e013b4d74f674f13fc81cb",
-                "sha256:c5230cbb25d0db9c7d27a1a04e0dfe047220206f5e79e11f0110aa82f564399c"
+                "sha256:156a63612ed58676b5686ddcde6bb3fe67b6ee090141483a92e56b5bb5f8b617",
+                "sha256:1d32f50d2131a43a39e0287d1b1854fcc0e98ab1513f0318df2ecab25bec54ab"
             ],
             "index": "tuna",
-            "version": "==6.0.0.post1"
+            "version": "==6.1.0"
         },
         "rstcheck-core": {
             "hashes": [
@@ -718,11 +732,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:194b74f2c2d1800268fe2d857d99981e7c04d010de3099f04ee45ebec535e560",
-                "sha256:3bcaf6e27ad3b0f643ba0a48c5ab9eca930c3eb51df0e068f4826ab880c394ea"
+                "sha256:d73f8cd714a1a6691f5eb5abeeacbf313242b7aa2f5eba93776542c1aad90c6f",
+                "sha256:fe9a97f68b064a6ddd4bacfb0b4b93a4c65a556d97ce906255540439d0c35cef"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==64.0.3"
+            "version": "==65.0.0"
         },
         "shellingham": {
             "hashes": [
@@ -870,11 +884,11 @@
                 "all"
             ],
             "hashes": [
-                "sha256:023bae00d1baf358a6cc7cea45851639360bb716de687b42b0a4641cd99173f1",
-                "sha256:b8261c6c0152dd73478b5ba96ba677e5d6948c715c310f7c91079f311f62ec03"
+                "sha256:2d5720a5e63f73eaf31edaa15f6ab87f35f0690f8ca233017d7d23d743a91d73",
+                "sha256:54b19e5df18654070a82f8c2aa1da456a4ac16a2a83e6dcd9f170e291c56338e"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==0.4.2"
+            "version": "==0.6.1"
         },
         "types-docutils": {
             "hashes": [
