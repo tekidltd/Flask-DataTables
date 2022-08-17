@@ -446,11 +446,11 @@
         },
         "matplotlib-inline": {
             "hashes": [
-                "sha256:a04bfba22e0d1395479f866853ec1ee28eea1485c1d69a6faf00dc3e24ff34ee",
-                "sha256:aed605ba3b72462d64d475a21a9296f400a19c4f74a31b59103d2a99ffd5aa5c"
+                "sha256:a68624e181d5b272bbfbaadb44412c9d3c9ebbcb703404502b9c937afc377ff5",
+                "sha256:a728d796a1a44265b310340ef04ba8aba4e89dcb76dfdd1272becab4923dd867"
             ],
             "markers": "python_version >= '3.5'",
-            "version": "==0.1.3"
+            "version": "==0.1.5"
         },
         "mccabe": {
             "hashes": [
@@ -732,11 +732,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:7a2e7e95c3bf33f356b4c59aee7a6848585c4219dd3e941e43cc117888f210e4",
-                "sha256:c04a012ae3a1b2cc2aeed4893377b70ea61c6c143d0acceea16ec4b60de6e40d"
+                "sha256:101bf15ca723beef42c8db91a761f3748d4d697e17fae904db60c0b619d8d094",
+                "sha256:39275e7aafa4a4f0f4308f2302c6ee384dcdacdbaacc1e30dcbb6fd824c625bb"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==65.0.1"
+            "version": "==65.0.2"
         },
         "shellingham": {
             "hashes": [
