@@ -717,10 +717,10 @@
         },
         "rich": {
             "hashes": [
-                "sha256:48108142d113c5f03dd7946bfcdfe215ef06064eb3072866ea9c5799863ad17b",
-                "sha256:e8b2ba10ed314c4c5bc30de39e0571ec4be05d23d733b6b7b286d0694f46bdc0"
+                "sha256:332fa897bc731c982213dcc0d39871e54ab03c2518a9f0f9e6d07b75507a25d4",
+                "sha256:6e3ea0ccadfff2a9f263b0275528c5bde0801a4f1919bdd5b586e404e3a5c54a"
             ],
-            "version": "==12.6.0a1"
+            "version": "==12.6.0a2"
         },
         "rstcheck": {
             "hashes": [
