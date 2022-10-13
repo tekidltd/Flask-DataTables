@@ -850,11 +850,11 @@
         },
         "stevedore": {
             "hashes": [
-                "sha256:87e4d27fe96d0d7e4fc24f0cbe3463baae4ec51e81d95fbe60d2474636e0c7d8",
-                "sha256:f82cc99a1ff552310d19c379827c2c64dd9f85a38bcd5559db2470161867b786"
+                "sha256:01645addb67beff04c7cfcbb0a6af8327d2efc3380b0f034aa316d4576c4d470",
+                "sha256:9a23111a6e612270c591fd31ff3321c6b5f3d5f3dabb1427317a5ab608fc261a"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==4.0.0"
+            "version": "==4.0.1"
         },
         "toml": {
             "hashes": [
