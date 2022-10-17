@@ -779,11 +779,11 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:5b10cb1022dac8c035f75767799c39217a05fc0fe2d6fe5597560d38e44f0363",
-                "sha256:7abf6fabd7b58d0727b7317d5e2650ef68765bbe0ccb63c8795fa8683477eaa2"
+                "sha256:55f485389bbde8962fdbb03cf6e39672852ea1992282faa5b46df99c8319656f",
+                "sha256:e6d970d3c0a07cb0e6aa86ee405dda0806f5c8f3b2546e5523d7a4f5e711b4b5"
             ],
             "index": "tuna",
-            "version": "==5.2.3"
+            "version": "==6.0.0b1"
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
