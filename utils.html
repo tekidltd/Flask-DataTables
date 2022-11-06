@@ -1,18 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Utilities &amp; Auxiliaries &#8212; Flask-DataTables 0.1.2 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Type Hints" href="typing.html" />
@@ -34,7 +36,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-flask_datatables.utils"></span><section id="utilities-auxiliaries">
-<h1>Utilities &amp; Auxiliaries<a class="headerlink" href="#utilities-auxiliaries" title="Permalink to this headline">¶</a></h1>
+<h1>Utilities &amp; Auxiliaries<a class="headerlink" href="#utilities-auxiliaries" title="Permalink to this heading">¶</a></h1>
 <p>We provided some auxiliary functions for <code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code>.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#flask_datatables.utils.render_macro" title="flask_datatables.utils.render_macro"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_macro()</span></code></a> renders a given
@@ -48,15 +50,15 @@ from the URL</p></li>
 </ul>
 </section>
 <dl class="py function">
-<dt id="flask_datatables.utils.render_macro">
-<code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">render_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_name_or_list</span></em>, <em class="sig-param"><span class="n">macro</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">context</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#render_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.render_macro" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="flask_datatables.utils.render_macro">
+<span class="sig-prename descclassname"><span class="pre">flask_datatables.utils.</span></span><span class="sig-name descname"><span class="pre">render_macro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_name_or_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macro</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#render_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_datatables.utils.render_macro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates and renders a <strong>macro</strong> from the template.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>template_name_or_list</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>]</em>) – The name of the template to be rendered, or an iterable with template names
+<li><p><strong>template_name_or_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – The name of the template to be rendered, or an iterable with template names
 the first one existing will be rendered.</p></li>
-<li><p><strong>macro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of macro to be called.</p></li>
+<li><p><strong>macro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of macro to be called.</p></li>
 <li><p><strong>context</strong> (<em>Any</em>) – </p></li>
 </ul>
 </dd>
@@ -64,7 +66,7 @@ the first one existing will be rendered.</p></li>
 <dd class="field-even"><p><strong>**context</strong> – The variables that should be available in the context of the template.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The rendered macro.</p>
@@ -73,8 +75,8 @@ the first one existing will be rendered.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="flask_datatables.utils.prepare_response">
-<code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">prepare_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#prepare_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.prepare_response" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="flask_datatables.utils.prepare_response">
+<span class="sig-prename descclassname"><span class="pre">flask_datatables.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#prepare_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_datatables.utils.prepare_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare response object data.</p>
 <p>The function returns a wrapper function to use the <code class="docutils literal notranslate"><span class="pre">template</span></code> as a factory to
 render HTML response blocks. The Jinja templates should have <strong>macro</strong> blocks
@@ -82,10 +84,10 @@ for each target field named after <code class="docutils literal notranslate"><sp
 argument <code class="docutils literal notranslate"><span class="pre">record</span></code> as the selected data model record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>template</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em><em>]</em>) – Path to the macro template.</p>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – Path to the macro template.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Callable[[<a class="reference internal" href="model.html#flask_datatables.model.Model" title="flask_datatables.model.Model">Model</a>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData">ObjectData</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code>], <a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData" title="flask_datatables.typing.ObjectData"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectData</span></code></a>]</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Prepared response object data.</p>
@@ -94,20 +96,20 @@ argument <code class="docutils literal notranslate"><span class="pre">record</sp
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>See <a class="reference internal" href="#flask_datatables.utils.render_macro" title="flask_datatables.utils.render_macro"><code class="xref py py-func docutils literal notranslate"><span class="pre">flask_datatables.utils.render_macro()</span></code></a> for more information.</p>
-</aside>
+</div>
 </dd></dl>
 
 <dl class="py function">
-<dt id="flask_datatables.utils.parse_request">
-<code class="sig-prename descclassname">flask_datatables.utils.</code><code class="sig-name descname">parse_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#parse_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_datatables.utils.parse_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="flask_datatables.utils.parse_request">
+<span class="sig-prename descclassname"><span class="pre">flask_datatables.utils.</span></span><span class="sig-name descname"><span class="pre">parse_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_datatables/utils.html#parse_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flask_datatables.utils.parse_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">flask.request.args</span></code></a> as <code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>args</strong> (<em>Optional</em><em>[</em><em>ImmutableMultiDict</em><em>]</em>) – Original request arguments. The default value is inferred from
+<dd class="field-odd"><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableMultiDict</span></code>]) – Original request arguments. The default value is inferred from
 <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Request.args" title="(in Flask v1.1.x)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">request.args</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query">Query</a></p>
+<dd class="field-even"><p><a class="reference internal" href="typing.html#flask_datatables.typing.Query" title="flask_datatables.typing.Query"><code class="xref py py-class docutils literal notranslate"><span class="pre">Query</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Parsed query dictionary.</p>
@@ -142,10 +144,51 @@ argument <code class="docutils literal notranslate"><span class="pre">record</sp
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html#flask_datatables.database.DataTable"><code class="docutils literal notranslate"><span class="pre">DataTable</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.AutoField"><code class="docutils literal notranslate"><span class="pre">AutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BareField"><code class="docutils literal notranslate"><span class="pre">BareField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigAutoField"><code class="docutils literal notranslate"><span class="pre">BigAutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigBitField"><code class="docutils literal notranslate"><span class="pre">BigBitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigIntegerField"><code class="docutils literal notranslate"><span class="pre">BigIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BinaryUUIDField"><code class="docutils literal notranslate"><span class="pre">BinaryUUIDField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BitField"><code class="docutils literal notranslate"><span class="pre">BitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BlobField"><code class="docutils literal notranslate"><span class="pre">BlobField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BooleanField"><code class="docutils literal notranslate"><span class="pre">BooleanField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.CharField"><code class="docutils literal notranslate"><span class="pre">CharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateField"><code class="docutils literal notranslate"><span class="pre">DateField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateTimeField"><code class="docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DecimalField"><code class="docutils literal notranslate"><span class="pre">DecimalField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DoubleField"><code class="docutils literal notranslate"><span class="pre">DoubleField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FixedCharField"><code class="docutils literal notranslate"><span class="pre">FixedCharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FloatField"><code class="docutils literal notranslate"><span class="pre">FloatField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ForeignKeyField"><code class="docutils literal notranslate"><span class="pre">ForeignKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IdentityField"><code class="docutils literal notranslate"><span class="pre">IdentityField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IntegerField"><code class="docutils literal notranslate"><span class="pre">IntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IPField"><code class="docutils literal notranslate"><span class="pre">IPField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ManyToManyField"><code class="docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.PrimaryKeyField"><code class="docutils literal notranslate"><span class="pre">PrimaryKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.SmallIntegerField"><code class="docutils literal notranslate"><span class="pre">SmallIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TextField"><code class="docutils literal notranslate"><span class="pre">TextField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimeField"><code class="docutils literal notranslate"><span class="pre">TimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimestampField"><code class="docutils literal notranslate"><span class="pre">TimestampField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.UUIDField"><code class="docutils literal notranslate"><span class="pre">UUIDField</span></code></a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#flask_datatables.utils.render_macro"><code class="docutils literal notranslate"><span class="pre">render_macro()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#flask_datatables.utils.prepare_response"><code class="docutils literal notranslate"><span class="pre">prepare_response()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#flask_datatables.utils.parse_request"><code class="docutils literal notranslate"><span class="pre">parse_request()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Column"><code class="docutils literal notranslate"><span class="pre">Column</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData"><code class="docutils literal notranslate"><span class="pre">ObjectData</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ArrayData"><code class="docutils literal notranslate"><span class="pre">ArrayData</span></code></a></li>
 </ul>
 
 <div class="relations">
@@ -161,12 +204,12 @@ argument <code class="docutils literal notranslate"><span class="pre">record</sp
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

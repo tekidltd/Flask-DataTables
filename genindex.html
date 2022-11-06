@@ -1,17 +1,19 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index &#8212; Flask-DataTables 0.1.2 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -141,10 +143,12 @@
       </ul></li>
       <li><a href="fields.html#flask_datatables.fields.Field.dt_order">dt_order() (flask_datatables.fields.Field static method)</a>
 </li>
-      <li><a href="model.html#flask_datatables.model.Model.dt_orderable">dt_orderable (flask_datatables.model.Model attribute)</a>
+      <li><a href="fields.html#flask_datatables.fields.Field.dt_orderable">dt_orderable (flask_datatables.fields.Field property)</a>
+
+      <ul>
+        <li><a href="model.html#flask_datatables.model.Model.dt_orderable">(flask_datatables.model.Model attribute)</a>
 </li>
-      <li><a href="fields.html#flask_datatables.fields.Field.dt_orderable">dt_orderable() (flask_datatables.fields.Field property)</a>
-</li>
+      </ul></li>
       <li><a href="typing.html#flask_datatables.typing.ObjectData.DT_RowAttr">DT_RowAttr (flask_datatables.typing.ObjectData attribute)</a>
 </li>
       <li><a href="typing.html#flask_datatables.typing.ObjectData.DT_RowClass">DT_RowClass (flask_datatables.typing.ObjectData attribute)</a>
@@ -175,9 +179,7 @@
         <li><a href="fields.html#flask_datatables.fields.UUIDField.dt_search">(flask_datatables.fields.UUIDField static method)</a>
 </li>
       </ul></li>
-      <li><a href="model.html#flask_datatables.model.Model.dt_searchable">dt_searchable (flask_datatables.model.Model attribute)</a>
-</li>
-      <li><a href="fields.html#flask_datatables.fields.BinaryUUIDField.dt_searchable">dt_searchable() (flask_datatables.fields.BinaryUUIDField property)</a>
+      <li><a href="fields.html#flask_datatables.fields.BinaryUUIDField.dt_searchable">dt_searchable (flask_datatables.fields.BinaryUUIDField property)</a>
 
       <ul>
         <li><a href="fields.html#flask_datatables.fields.BooleanField.dt_searchable">(flask_datatables.fields.BooleanField property)</a>
@@ -191,6 +193,8 @@
         <li><a href="fields.html#flask_datatables.fields.IntegerField.dt_searchable">(flask_datatables.fields.IntegerField property)</a>
 </li>
         <li><a href="fields.html#flask_datatables.fields.UUIDField.dt_searchable">(flask_datatables.fields.UUIDField property)</a>
+</li>
+        <li><a href="model.html#flask_datatables.model.Model.dt_searchable">(flask_datatables.model.Model attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -321,65 +325,13 @@
 </li>
       <li><a href="typing.html#flask_datatables.typing.Order">Order (class in flask_datatables.typing)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="typing.html#flask_datatables.typing.Query.order">order (flask_datatables.typing.Query attribute)</a>
 </li>
-      <li><a href="fields.html#flask_datatables.fields.AutoField.orderable">orderable (flask_datatables.fields.AutoField attribute)</a>
+      <li><a href="fields.html#flask_datatables.fields.Field.orderable">orderable (flask_datatables.fields.Field attribute)</a>
 
       <ul>
-        <li><a href="fields.html#flask_datatables.fields.BareField.orderable">(flask_datatables.fields.BareField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BigAutoField.orderable">(flask_datatables.fields.BigAutoField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BigBitField.orderable">(flask_datatables.fields.BigBitField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BigIntegerField.orderable">(flask_datatables.fields.BigIntegerField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BinaryUUIDField.orderable">(flask_datatables.fields.BinaryUUIDField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BitField.orderable">(flask_datatables.fields.BitField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BlobField.orderable">(flask_datatables.fields.BlobField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BooleanField.orderable">(flask_datatables.fields.BooleanField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.CharField.orderable">(flask_datatables.fields.CharField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DateField.orderable">(flask_datatables.fields.DateField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DateTimeField.orderable">(flask_datatables.fields.DateTimeField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DecimalField.orderable">(flask_datatables.fields.DecimalField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DoubleField.orderable">(flask_datatables.fields.DoubleField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.Field.orderable">(flask_datatables.fields.Field attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.FixedCharField.orderable">(flask_datatables.fields.FixedCharField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.FloatField.orderable">(flask_datatables.fields.FloatField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.ForeignKeyField.orderable">(flask_datatables.fields.ForeignKeyField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.IdentityField.orderable">(flask_datatables.fields.IdentityField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.IntegerField.orderable">(flask_datatables.fields.IntegerField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.IPField.orderable">(flask_datatables.fields.IPField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.ManyToManyField.orderable">(flask_datatables.fields.ManyToManyField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.PrimaryKeyField.orderable">(flask_datatables.fields.PrimaryKeyField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.SmallIntegerField.orderable">(flask_datatables.fields.SmallIntegerField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.TextField.orderable">(flask_datatables.fields.TextField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.TimeField.orderable">(flask_datatables.fields.TimeField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.TimestampField.orderable">(flask_datatables.fields.TimestampField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.UUIDField.orderable">(flask_datatables.fields.UUIDField attribute)</a>
-</li>
         <li><a href="typing.html#flask_datatables.typing.Column.orderable">(flask_datatables.typing.Column attribute)</a>
 </li>
       </ul></li>
@@ -439,70 +391,16 @@
         <li><a href="typing.html#flask_datatables.typing.Query.search">(flask_datatables.typing.Query attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="model.html#flask_datatables.model.Model.search">search() (flask_datatables.model.Model class method)</a>
 </li>
-      <li><a href="fields.html#flask_datatables.fields.AutoField.searchable">searchable (flask_datatables.fields.AutoField attribute)</a>
+      <li><a href="fields.html#flask_datatables.fields.Field.searchable">searchable (flask_datatables.fields.Field attribute)</a>
 
       <ul>
-        <li><a href="fields.html#flask_datatables.fields.BareField.searchable">(flask_datatables.fields.BareField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BigAutoField.searchable">(flask_datatables.fields.BigAutoField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BigBitField.searchable">(flask_datatables.fields.BigBitField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BigIntegerField.searchable">(flask_datatables.fields.BigIntegerField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BinaryUUIDField.searchable">(flask_datatables.fields.BinaryUUIDField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BitField.searchable">(flask_datatables.fields.BitField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BlobField.searchable">(flask_datatables.fields.BlobField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.BooleanField.searchable">(flask_datatables.fields.BooleanField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.CharField.searchable">(flask_datatables.fields.CharField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DateField.searchable">(flask_datatables.fields.DateField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DateTimeField.searchable">(flask_datatables.fields.DateTimeField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DecimalField.searchable">(flask_datatables.fields.DecimalField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.DoubleField.searchable">(flask_datatables.fields.DoubleField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.Field.searchable">(flask_datatables.fields.Field attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.FixedCharField.searchable">(flask_datatables.fields.FixedCharField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.FloatField.searchable">(flask_datatables.fields.FloatField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.ForeignKeyField.searchable">(flask_datatables.fields.ForeignKeyField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.IdentityField.searchable">(flask_datatables.fields.IdentityField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.IntegerField.searchable">(flask_datatables.fields.IntegerField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.IPField.searchable">(flask_datatables.fields.IPField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.ManyToManyField.searchable">(flask_datatables.fields.ManyToManyField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.PrimaryKeyField.searchable">(flask_datatables.fields.PrimaryKeyField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.SmallIntegerField.searchable">(flask_datatables.fields.SmallIntegerField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.TextField.searchable">(flask_datatables.fields.TextField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.TimeField.searchable">(flask_datatables.fields.TimeField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.TimestampField.searchable">(flask_datatables.fields.TimestampField attribute)</a>
-</li>
-        <li><a href="fields.html#flask_datatables.fields.UUIDField.searchable">(flask_datatables.fields.UUIDField attribute)</a>
-</li>
         <li><a href="typing.html#flask_datatables.typing.Column.searchable">(flask_datatables.typing.Column attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="fields.html#flask_datatables.fields.SmallIntegerField">SmallIntegerField (class in flask_datatables.fields)</a>
 </li>
       <li><a href="typing.html#flask_datatables.typing.Query.start">start (flask_datatables.typing.Query attribute)</a>
@@ -571,10 +469,51 @@
 <h3>Navigation</h3>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html#flask_datatables.database.DataTable"><code class="docutils literal notranslate"><span class="pre">DataTable</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.AutoField"><code class="docutils literal notranslate"><span class="pre">AutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BareField"><code class="docutils literal notranslate"><span class="pre">BareField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigAutoField"><code class="docutils literal notranslate"><span class="pre">BigAutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigBitField"><code class="docutils literal notranslate"><span class="pre">BigBitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigIntegerField"><code class="docutils literal notranslate"><span class="pre">BigIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BinaryUUIDField"><code class="docutils literal notranslate"><span class="pre">BinaryUUIDField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BitField"><code class="docutils literal notranslate"><span class="pre">BitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BlobField"><code class="docutils literal notranslate"><span class="pre">BlobField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BooleanField"><code class="docutils literal notranslate"><span class="pre">BooleanField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.CharField"><code class="docutils literal notranslate"><span class="pre">CharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateField"><code class="docutils literal notranslate"><span class="pre">DateField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateTimeField"><code class="docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DecimalField"><code class="docutils literal notranslate"><span class="pre">DecimalField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DoubleField"><code class="docutils literal notranslate"><span class="pre">DoubleField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FixedCharField"><code class="docutils literal notranslate"><span class="pre">FixedCharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FloatField"><code class="docutils literal notranslate"><span class="pre">FloatField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ForeignKeyField"><code class="docutils literal notranslate"><span class="pre">ForeignKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IdentityField"><code class="docutils literal notranslate"><span class="pre">IdentityField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IntegerField"><code class="docutils literal notranslate"><span class="pre">IntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IPField"><code class="docutils literal notranslate"><span class="pre">IPField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ManyToManyField"><code class="docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.PrimaryKeyField"><code class="docutils literal notranslate"><span class="pre">PrimaryKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.SmallIntegerField"><code class="docutils literal notranslate"><span class="pre">SmallIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TextField"><code class="docutils literal notranslate"><span class="pre">TextField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimeField"><code class="docutils literal notranslate"><span class="pre">TimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimestampField"><code class="docutils literal notranslate"><span class="pre">TimestampField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.UUIDField"><code class="docutils literal notranslate"><span class="pre">UUIDField</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.render_macro"><code class="docutils literal notranslate"><span class="pre">render_macro()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.prepare_response"><code class="docutils literal notranslate"><span class="pre">prepare_response()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.parse_request"><code class="docutils literal notranslate"><span class="pre">parse_request()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Column"><code class="docutils literal notranslate"><span class="pre">Column</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData"><code class="docutils literal notranslate"><span class="pre">ObjectData</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ArrayData"><code class="docutils literal notranslate"><span class="pre">ArrayData</span></code></a></li>
 </ul>
 
 <div class="relations">
@@ -588,12 +527,12 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 

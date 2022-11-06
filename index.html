@@ -1,18 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Flask &amp; peewee integration with DataTables server-side processing &#8212; Flask-DataTables 0.1.2 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Database Connection" href="database.html" />
@@ -33,27 +35,157 @@
           <div class="body" role="main">
             
   <section id="flask-peewee-integration-with-datatables-server-side-processing">
-<h1>Flask &amp; peewee integration with DataTables server-side processing<a class="headerlink" href="#flask-peewee-integration-with-datatables-server-side-processing" title="Permalink to this headline">¶</a></h1>
+<h1>Flask &amp; peewee integration with DataTables server-side processing<a class="headerlink" href="#flask-peewee-integration-with-datatables-server-side-processing" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html#flask_datatables.database.DataTable"><code class="docutils literal notranslate"><span class="pre">DataTable</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#flask_datatables.database.DataTable.init_app"><code class="docutils literal notranslate"><span class="pre">DataTable.init_app()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#flask_datatables.database.DataTable.base_model_class"><code class="docutils literal notranslate"><span class="pre">DataTable.base_model_class</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#flask_datatables.database.DataTable.database"><code class="docutils literal notranslate"><span class="pre">DataTable.database</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model.html#flask_datatables.model.Model.dt_orderable"><code class="docutils literal notranslate"><span class="pre">Model.dt_orderable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#flask_datatables.model.Model.dt_searchable"><code class="docutils literal notranslate"><span class="pre">Model.dt_searchable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#flask_datatables.model.Model.validate_model"><code class="docutils literal notranslate"><span class="pre">Model.validate_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#flask_datatables.model.Model.save"><code class="docutils literal notranslate"><span class="pre">Model.save()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#flask_datatables.model.Model.search"><code class="docutils literal notranslate"><span class="pre">Model.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model.html#flask_datatables.model.Metadata.datatables"><code class="docutils literal notranslate"><span class="pre">Metadata.datatables</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.Field.dt_order"><code class="docutils literal notranslate"><span class="pre">Field.dt_order()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.Field.dt_search"><code class="docutils literal notranslate"><span class="pre">Field.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.Field.dt_orderable"><code class="docutils literal notranslate"><span class="pre">Field.dt_orderable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.Field.dt_searchable"><code class="docutils literal notranslate"><span class="pre">Field.dt_searchable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.Field.orderable"><code class="docutils literal notranslate"><span class="pre">Field.orderable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.Field.searchable"><code class="docutils literal notranslate"><span class="pre">Field.searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.AutoField"><code class="docutils literal notranslate"><span class="pre">AutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BareField"><code class="docutils literal notranslate"><span class="pre">BareField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigAutoField"><code class="docutils literal notranslate"><span class="pre">BigAutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigBitField"><code class="docutils literal notranslate"><span class="pre">BigBitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigIntegerField"><code class="docutils literal notranslate"><span class="pre">BigIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BinaryUUIDField"><code class="docutils literal notranslate"><span class="pre">BinaryUUIDField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.BinaryUUIDField.dt_search"><code class="docutils literal notranslate"><span class="pre">BinaryUUIDField.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.BinaryUUIDField.dt_searchable"><code class="docutils literal notranslate"><span class="pre">BinaryUUIDField.dt_searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BitField"><code class="docutils literal notranslate"><span class="pre">BitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BlobField"><code class="docutils literal notranslate"><span class="pre">BlobField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BooleanField"><code class="docutils literal notranslate"><span class="pre">BooleanField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.BooleanField.dt_search"><code class="docutils literal notranslate"><span class="pre">BooleanField.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.BooleanField.dt_searchable"><code class="docutils literal notranslate"><span class="pre">BooleanField.dt_searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.CharField"><code class="docutils literal notranslate"><span class="pre">CharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateField"><code class="docutils literal notranslate"><span class="pre">DateField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateTimeField"><code class="docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DecimalField"><code class="docutils literal notranslate"><span class="pre">DecimalField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.DecimalField.dt_search"><code class="docutils literal notranslate"><span class="pre">DecimalField.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.DecimalField.dt_searchable"><code class="docutils literal notranslate"><span class="pre">DecimalField.dt_searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DoubleField"><code class="docutils literal notranslate"><span class="pre">DoubleField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FixedCharField"><code class="docutils literal notranslate"><span class="pre">FixedCharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FloatField"><code class="docutils literal notranslate"><span class="pre">FloatField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.FloatField.dt_search"><code class="docutils literal notranslate"><span class="pre">FloatField.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.FloatField.dt_searchable"><code class="docutils literal notranslate"><span class="pre">FloatField.dt_searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ForeignKeyField"><code class="docutils literal notranslate"><span class="pre">ForeignKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IdentityField"><code class="docutils literal notranslate"><span class="pre">IdentityField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IntegerField"><code class="docutils literal notranslate"><span class="pre">IntegerField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.IntegerField.dt_search"><code class="docutils literal notranslate"><span class="pre">IntegerField.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.IntegerField.dt_searchable"><code class="docutils literal notranslate"><span class="pre">IntegerField.dt_searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IPField"><code class="docutils literal notranslate"><span class="pre">IPField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.IPField.dt_search"><code class="docutils literal notranslate"><span class="pre">IPField.dt_search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ManyToManyField"><code class="docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.PrimaryKeyField"><code class="docutils literal notranslate"><span class="pre">PrimaryKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.SmallIntegerField"><code class="docutils literal notranslate"><span class="pre">SmallIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TextField"><code class="docutils literal notranslate"><span class="pre">TextField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimeField"><code class="docutils literal notranslate"><span class="pre">TimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimestampField"><code class="docutils literal notranslate"><span class="pre">TimestampField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.TimestampField.dt_search"><code class="docutils literal notranslate"><span class="pre">TimestampField.dt_search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.UUIDField"><code class="docutils literal notranslate"><span class="pre">UUIDField</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.UUIDField.dt_search"><code class="docutils literal notranslate"><span class="pre">UUIDField.dt_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#flask_datatables.fields.UUIDField.dt_searchable"><code class="docutils literal notranslate"><span class="pre">UUIDField.dt_searchable</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.render_macro"><code class="docutils literal notranslate"><span class="pre">render_macro()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.prepare_response"><code class="docutils literal notranslate"><span class="pre">prepare_response()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.parse_request"><code class="docutils literal notranslate"><span class="pre">parse_request()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Column"><code class="docutils literal notranslate"><span class="pre">Column</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Column.data"><code class="docutils literal notranslate"><span class="pre">Column.data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Column.name"><code class="docutils literal notranslate"><span class="pre">Column.name</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Column.orderable"><code class="docutils literal notranslate"><span class="pre">Column.orderable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Column.search"><code class="docutils literal notranslate"><span class="pre">Column.search</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Column.searchable"><code class="docutils literal notranslate"><span class="pre">Column.searchable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData"><code class="docutils literal notranslate"><span class="pre">ObjectData</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData.DT_RowAttr"><code class="docutils literal notranslate"><span class="pre">ObjectData.DT_RowAttr</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData.DT_RowClass"><code class="docutils literal notranslate"><span class="pre">ObjectData.DT_RowClass</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData.DT_RowData"><code class="docutils literal notranslate"><span class="pre">ObjectData.DT_RowData</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData.DT_RowId"><code class="docutils literal notranslate"><span class="pre">ObjectData.DT_RowId</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Order.column"><code class="docutils literal notranslate"><span class="pre">Order.column</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Order.dir"><code class="docutils literal notranslate"><span class="pre">Order.dir</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Query.columns"><code class="docutils literal notranslate"><span class="pre">Query.columns</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Query.draw"><code class="docutils literal notranslate"><span class="pre">Query.draw</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Query.length"><code class="docutils literal notranslate"><span class="pre">Query.length</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Query.order"><code class="docutils literal notranslate"><span class="pre">Query.order</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Query.search"><code class="docutils literal notranslate"><span class="pre">Query.search</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Query.start"><code class="docutils literal notranslate"><span class="pre">Query.start</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Response.data"><code class="docutils literal notranslate"><span class="pre">Response.data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Response.draw"><code class="docutils literal notranslate"><span class="pre">Response.draw</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Response.error"><code class="docutils literal notranslate"><span class="pre">Response.error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Response.recordsFiltered"><code class="docutils literal notranslate"><span class="pre">Response.recordsFiltered</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Response.recordsTotal"><code class="docutils literal notranslate"><span class="pre">Response.recordsTotal</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Search.regex"><code class="docutils literal notranslate"><span class="pre">Search.regex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="typing.html#flask_datatables.typing.Search.value"><code class="docutils literal notranslate"><span class="pre">Search.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ArrayData"><code class="docutils literal notranslate"><span class="pre">ArrayData</span></code></a></li>
 </ul>
 </div>
 <p>As <a class="reference external" href="https://datatables.net/">DataTables</a> is a quite power and useful JavaScript library for manipulating
 and displaying data, we intended to make integration of the client-side DataTables
 scripts with the server-side processing based on <code class="docutils literal notranslate"><span class="pre">Flask</span></code> and <code class="docutils literal notranslate"><span class="pre">peewee</span></code>.</p>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As we have noticed, there’s already a <code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> library available
 on <a class="reference external" href="https://pypi.org/project/Flask-DataTables/">PyPI</a>. However, this package was intended for integration with <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code>
 instead of <code class="docutils literal notranslate"><span class="pre">peewee</span></code>.</p>
-</aside>
+</div>
 <p>To start with, simply install the <code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> package from
 <a class="reference external" href="https://pypi.org/project/Flask-DataTables-peewee">PyPI</a>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install Flask-DataTables-peewee
@@ -67,7 +199,7 @@ pip install .
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Flask-DataTables</span></code> is quite simple to use, just declare your data model in
 the preferable way from <code class="docutils literal notranslate"><span class="pre">peewee</span></code> and voilà, that’s it.</p>
 <p>Taking examples from the <code class="docutils literal notranslate"><span class="pre">peewee</span></code> <a class="reference external" href="http://docs.peewee-orm.com/en/latest/peewee/playhouse.html">documentation</a>,
@@ -108,11 +240,11 @@ to perform the server-side processing queries.</p>
 fields through <a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> parameters,
 and their corresponding behaviours by subclassing the
 <a class="reference internal" href="fields.html#flask_datatables.fields.Field" title="flask_datatables.fields.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> classes.</p>
-</aside>
+</div>
 </section>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -146,10 +278,51 @@ and their corresponding behaviours by subclassing the
 <h3>Navigation</h3>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html#flask_datatables.database.DataTable"><code class="docutils literal notranslate"><span class="pre">DataTable</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Base Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html#flask_datatables.model.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Data Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.Field"><code class="docutils literal notranslate"><span class="pre">Field</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.AutoField"><code class="docutils literal notranslate"><span class="pre">AutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BareField"><code class="docutils literal notranslate"><span class="pre">BareField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigAutoField"><code class="docutils literal notranslate"><span class="pre">BigAutoField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigBitField"><code class="docutils literal notranslate"><span class="pre">BigBitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BigIntegerField"><code class="docutils literal notranslate"><span class="pre">BigIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BinaryUUIDField"><code class="docutils literal notranslate"><span class="pre">BinaryUUIDField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BitField"><code class="docutils literal notranslate"><span class="pre">BitField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BlobField"><code class="docutils literal notranslate"><span class="pre">BlobField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.BooleanField"><code class="docutils literal notranslate"><span class="pre">BooleanField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.CharField"><code class="docutils literal notranslate"><span class="pre">CharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateField"><code class="docutils literal notranslate"><span class="pre">DateField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DateTimeField"><code class="docutils literal notranslate"><span class="pre">DateTimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DecimalField"><code class="docutils literal notranslate"><span class="pre">DecimalField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.DoubleField"><code class="docutils literal notranslate"><span class="pre">DoubleField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FixedCharField"><code class="docutils literal notranslate"><span class="pre">FixedCharField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.FloatField"><code class="docutils literal notranslate"><span class="pre">FloatField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ForeignKeyField"><code class="docutils literal notranslate"><span class="pre">ForeignKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IdentityField"><code class="docutils literal notranslate"><span class="pre">IdentityField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IntegerField"><code class="docutils literal notranslate"><span class="pre">IntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.IPField"><code class="docutils literal notranslate"><span class="pre">IPField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.ManyToManyField"><code class="docutils literal notranslate"><span class="pre">ManyToManyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.PrimaryKeyField"><code class="docutils literal notranslate"><span class="pre">PrimaryKeyField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.SmallIntegerField"><code class="docutils literal notranslate"><span class="pre">SmallIntegerField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TextField"><code class="docutils literal notranslate"><span class="pre">TextField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimeField"><code class="docutils literal notranslate"><span class="pre">TimeField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.TimestampField"><code class="docutils literal notranslate"><span class="pre">TimestampField</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html#flask_datatables.fields.UUIDField"><code class="docutils literal notranslate"><span class="pre">UUIDField</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities &amp; Auxiliaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.render_macro"><code class="docutils literal notranslate"><span class="pre">render_macro()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.prepare_response"><code class="docutils literal notranslate"><span class="pre">prepare_response()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html#flask_datatables.utils.parse_request"><code class="docutils literal notranslate"><span class="pre">parse_request()</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="typing.html">Type Hints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Column"><code class="docutils literal notranslate"><span class="pre">Column</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ObjectData"><code class="docutils literal notranslate"><span class="pre">ObjectData</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Query"><code class="docutils literal notranslate"><span class="pre">Query</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="typing.html#flask_datatables.typing.ArrayData"><code class="docutils literal notranslate"><span class="pre">ArrayData</span></code></a></li>
 </ul>
 
 <div class="relations">
@@ -164,12 +337,12 @@ and their corresponding behaviours by subclassing the
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
