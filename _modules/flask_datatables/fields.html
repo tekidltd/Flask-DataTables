@@ -92,7 +92,7 @@
 
 
 <div class="viewcode-block" id="Field"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.Field">[docs]</a><span class="k">class</span> <span class="nc">Field</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.Field`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.Field`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        orderable: Optional[Union[bool, peewee.Field]]: `DataTables`_ orderable field.</span>
@@ -137,11 +137,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_orderable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default orderable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default orderable field.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orderable</span><span class="p">:</span> <span class="s1">&#39;Optional[Union[bool, Field]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">searchable</span><span class="p">:</span> <span class="s1">&#39;Optional[Union[bool, Field]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=line-too-long</span>
                  <span class="n">null</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">column_name</span><span class="p">:</span> <span class="s1">&#39;Optional[str]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -167,7 +167,7 @@
 
 <div class="viewcode-block" id="Field.dt_order"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.Field.dt_order">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_order</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ ordering operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ ordering operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -180,7 +180,7 @@
 
 <div class="viewcode-block" id="Field.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.Field.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;Any&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Any&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -193,16 +193,16 @@
 
 
 <div class="viewcode-block" id="IntegerField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.IntegerField">[docs]</a><span class="k">class</span> <span class="nc">IntegerField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.IntegerField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.IntegerField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="IntegerField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.IntegerField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -215,40 +215,40 @@
 
 
 <div class="viewcode-block" id="BigIntegerField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BigIntegerField">[docs]</a><span class="k">class</span> <span class="nc">BigIntegerField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BigIntegerField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BigIntegerField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BigIntegerField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="SmallIntegerField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.SmallIntegerField">[docs]</a><span class="k">class</span> <span class="nc">SmallIntegerField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">SmallIntegerField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.SmallIntegerField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.SmallIntegerField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="AutoField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.AutoField">[docs]</a><span class="k">class</span> <span class="nc">AutoField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">AutoField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.AutoField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.AutoField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="BigAutoField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BigAutoField">[docs]</a><span class="k">class</span> <span class="nc">BigAutoField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BigAutoField</span><span class="p">,</span> <span class="n">AutoField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BigAutoField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BigAutoField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="IdentityField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.IdentityField">[docs]</a><span class="k">class</span> <span class="nc">IdentityField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">IdentityField</span><span class="p">,</span> <span class="n">AutoField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.IdentityField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.IdentityField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="PrimaryKeyField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.PrimaryKeyField">[docs]</a><span class="k">class</span> <span class="nc">PrimaryKeyField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">PrimaryKeyField</span><span class="p">,</span> <span class="n">AutoField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.PrimaryKeyField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.PrimaryKeyField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="FloatField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.FloatField">[docs]</a><span class="k">class</span> <span class="nc">FloatField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">FloatField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.FloatField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.FloatField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">peewee</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FloatField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.FloatField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -261,20 +261,20 @@
 
 
 <div class="viewcode-block" id="DoubleField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.DoubleField">[docs]</a><span class="k">class</span> <span class="nc">DoubleField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">DoubleField</span><span class="p">,</span> <span class="n">FloatField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DoubleField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DoubleField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="DecimalField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.DecimalField">[docs]</a><span class="k">class</span> <span class="nc">DecimalField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DecimalField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DecimalField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">peewee</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DecimalField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.DecimalField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;Decimal&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -287,44 +287,44 @@
 
 
 <span class="k">class</span> <span class="nc">_StringField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">_StringField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>  <span class="c1"># pylint: disable=protected-access</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee._StringField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee._StringField`.&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="CharField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.CharField">[docs]</a><span class="k">class</span> <span class="nc">CharField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">,</span> <span class="n">_StringField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.CharField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.CharField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="FixedCharField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.FixedCharField">[docs]</a><span class="k">class</span> <span class="nc">FixedCharField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">FixedCharField</span><span class="p">,</span> <span class="n">CharField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.FixedCharField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.FixedCharField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="TextField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.TextField">[docs]</a><span class="k">class</span> <span class="nc">TextField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">TextField</span><span class="p">,</span> <span class="n">_StringField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.TextField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.TextField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="BlobField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BlobField">[docs]</a><span class="k">class</span> <span class="nc">BlobField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BlobField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BlobField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BlobField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="BitField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BitField">[docs]</a><span class="k">class</span> <span class="nc">BitField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BitField</span><span class="p">,</span> <span class="n">BigIntegerField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BitField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BitField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="BigBitField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BigBitField">[docs]</a><span class="k">class</span> <span class="nc">BigBitField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BigBitField</span><span class="p">,</span> <span class="n">BlobField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BigBitField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BigBitField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="UUIDField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.UUIDField">[docs]</a><span class="k">class</span> <span class="nc">UUIDField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.UUIDField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.UUIDField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="UUIDField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.UUIDField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;UUID&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -337,16 +337,16 @@
 
 
 <div class="viewcode-block" id="BinaryUUIDField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BinaryUUIDField">[docs]</a><span class="k">class</span> <span class="nc">BinaryUUIDField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BinaryUUIDField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BinaryUUIDField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BinaryUUIDField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BinaryUUIDField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BinaryUUIDField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;UUID&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -359,16 +359,16 @@
 
 
 <span class="k">class</span> <span class="nc">_BaseFormattedField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">_BaseFormattedField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>  <span class="c1"># pylint: disable=protected-access</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee._BaseFormattedField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee._BaseFormattedField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">peewee</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;Union[datetime, date, time]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -381,23 +381,23 @@
 
 
 <div class="viewcode-block" id="DateTimeField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.DateTimeField">[docs]</a><span class="k">class</span> <span class="nc">DateTimeField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">,</span> <span class="n">_BaseFormattedField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DateTimeField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DateTimeField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="DateField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.DateField">[docs]</a><span class="k">class</span> <span class="nc">DateField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">DateField</span><span class="p">,</span> <span class="n">_BaseFormattedField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DateField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DateField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="TimeField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.TimeField">[docs]</a><span class="k">class</span> <span class="nc">TimeField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">TimeField</span><span class="p">,</span> <span class="n">_BaseFormattedField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.TimeField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.TimeField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="TimestampField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.TimestampField">[docs]</a><span class="k">class</span> <span class="nc">TimestampField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">TimestampField</span><span class="p">,</span> <span class="n">BigIntegerField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.TimestampField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.TimestampField`.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TimestampField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.TimestampField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;datetime&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -410,11 +410,11 @@
 
 
 <div class="viewcode-block" id="IPField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.IPField">[docs]</a><span class="k">class</span> <span class="nc">IPField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">IPField</span><span class="p">,</span> <span class="n">BigIntegerField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.IPField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.IPField`.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="IPField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.IPField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -427,16 +427,16 @@
 
 
 <div class="viewcode-block" id="BooleanField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BooleanField">[docs]</a><span class="k">class</span> <span class="nc">BooleanField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BooleanField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BooleanField`.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt_searchable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Optional[Field]&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;`DataTables`_ default searchable field.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">peewee</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BooleanField.dt_search"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BooleanField.dt_search">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dt_search</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert value for `DataTables`_ searching operation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            value: Source value.</span>
@@ -449,23 +449,23 @@
 
 
 <div class="viewcode-block" id="BareField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.BareField">[docs]</a><span class="k">class</span> <span class="nc">BareField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">BareField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BareField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.BareField`.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="ForeignKeyField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.ForeignKeyField">[docs]</a><span class="k">class</span> <span class="nc">ForeignKeyField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">ForeignKeyField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.ForeignKeyField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.ForeignKeyField`.&quot;&quot;&quot;</span></div>
 
 
 <span class="k">class</span> <span class="nc">DeferredForeignKey</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">DeferredForeignKey</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DeferredForeignKey`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.DeferredForeignKey`.&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="ManyToManyField"><a class="viewcode-back" href="../../fields.html#flask_datatables.fields.ManyToManyField">[docs]</a><span class="k">class</span> <span class="nc">ManyToManyField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.ManyToManyField`.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.ManyToManyField`.&quot;&quot;&quot;</span></div>
 
 
 <span class="k">class</span> <span class="nc">VirtualField</span><span class="p">(</span><span class="n">peewee</span><span class="o">.</span><span class="n">VirtualField</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extending :class:`peewee.VirtualField`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extending :class:`peewee.VirtualField`.&quot;&quot;&quot;</span>
 </pre></div>
 
           </div>

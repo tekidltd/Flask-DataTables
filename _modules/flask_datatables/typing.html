@@ -58,7 +58,7 @@
 
 
 <div class="viewcode-block" id="Search"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Search">[docs]</a><span class="k">class</span> <span class="nc">Search</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Search information.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search information.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Global search value. To be applied to all columns</span>
     <span class="c1">#: which have ``searchable`` as :data:`True`.</span>
@@ -75,7 +75,7 @@
 
 
 <div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Order">[docs]</a><span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Ordering information.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ordering information.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Column to which ordering should be applied. This is an</span>
     <span class="c1">#: index reference to the :attr:`~tekid.ext.datatables.Query.columns`</span>
@@ -89,7 +89,7 @@
 
 
 <div class="viewcode-block" id="Column"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Column">[docs]</a><span class="k">class</span> <span class="nc">Column</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Column data.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Column data.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Column&#39;s data source, as defined by :js:attr:`columns.data`.</span>
     <span class="n">data</span><span class="p">:</span> <span class="nb">str</span>
@@ -110,7 +110,7 @@
 
 
 <div class="viewcode-block" id="Query"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Query">[docs]</a><span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sent parameters.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sent parameters.</span>
 
 <span class="sd">    When making a request to the server using server-side processing,</span>
 <span class="sd">    DataTables will send the following data in order to let the server</span>
@@ -156,7 +156,7 @@
 
 
 <div class="viewcode-block" id="ObjectData"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.ObjectData">[docs]</a><span class="k">class</span> <span class="nc">ObjectData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Server-side processing return using objects.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Server-side processing return using objects.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Set the ID property of the ``tr`` node to this value.</span>
     <span class="n">DT_RowId</span><span class="p">:</span> <span class="nb">str</span>
@@ -178,7 +178,7 @@
 
 
 <div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returned data.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returned data.</span>
 
 <span class="sd">    Once DataTables has made a request for data, with the above</span>
 <span class="sd">    parameters sent to the server, it expects JSON data to be</span>
