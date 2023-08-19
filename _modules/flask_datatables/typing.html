@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>flask_datatables.typing &#8212; Flask-DataTables 0.1.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b0099a1c"></script>
+    <script src="../../_static/documentation_options.js?v=92734c54"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -56,7 +56,9 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Query&#39;</span><span class="p">,</span> <span class="s1">&#39;Response&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="Search"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Search">[docs]</a><span class="k">class</span> <span class="nc">Search</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<div class="viewcode-block" id="Search">
+<a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Search">[docs]</a>
+<span class="k">class</span> <span class="nc">Search</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Search information.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Global search value. To be applied to all columns</span>
@@ -73,7 +75,10 @@
     <span class="n">regex</span><span class="p">:</span> <span class="nb">bool</span></div>
 
 
-<div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Order">[docs]</a><span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Order">
+<a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Order">[docs]</a>
+<span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ordering information.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Column to which ordering should be applied. This is an</span>
@@ -87,7 +92,10 @@
     <span class="nb">dir</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;asc&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Column"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Column">[docs]</a><span class="k">class</span> <span class="nc">Column</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Column">
+<a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Column">[docs]</a>
+<span class="k">class</span> <span class="nc">Column</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Column data.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Column&#39;s data source, as defined by :js:attr:`columns.data`.</span>
@@ -108,7 +116,10 @@
     <span class="n">search</span><span class="p">:</span> <span class="n">Search</span></div>
 
 
-<div class="viewcode-block" id="Query"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Query">[docs]</a><span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Query">
+<a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Query">[docs]</a>
+<span class="k">class</span> <span class="nc">Query</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sent parameters.</span>
 
 <span class="sd">    When making a request to the server using server-side processing,</span>
@@ -150,11 +161,14 @@
     <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Column</span><span class="p">]</span></div>
 
 
+
 <span class="c1">#: Server-side processing return using arrays as the data source for the table.</span>
 <span class="n">ArrayData</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="ObjectData"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.ObjectData">[docs]</a><span class="k">class</span> <span class="nc">ObjectData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ObjectData">
+<a class="viewcode-back" href="../../typing.html#flask_datatables.typing.ObjectData">[docs]</a>
+<span class="k">class</span> <span class="nc">ObjectData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Server-side processing return using objects.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Set the ID property of the ``tr`` node to this value.</span>
@@ -176,7 +190,10 @@
     <span class="n">DT_RowAttr</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Response">
+<a class="viewcode-back" href="../../typing.html#flask_datatables.typing.Response">[docs]</a>
+<span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returned data.</span>
 
 <span class="sd">    Once DataTables has made a request for data, with the above</span>
@@ -214,6 +231,7 @@
     <span class="c1">#: back the error message to be displayed using this parameter. Do not</span>
     <span class="c1">#: include if there is no error.</span>
     <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
 </pre></div>
 
           </div>

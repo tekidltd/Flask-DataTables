@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>flask_datatables.model &#8212; Flask-DataTables 0.1.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b0099a1c"></script>
+    <script src="../../_static/documentation_options.js?v=92734c54"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -68,7 +68,9 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="s1">&#39;Metadata&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="Metadata"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Metadata">[docs]</a><span class="k">class</span> <span class="nc">Metadata</span><span class="p">(</span><span class="n">_Metadata</span><span class="p">):</span>
+<div class="viewcode-block" id="Metadata">
+<a class="viewcode-back" href="../../model.html#flask_datatables.model.Metadata">[docs]</a>
+<span class="k">class</span> <span class="nc">Metadata</span><span class="p">(</span><span class="n">_Metadata</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Basic metadata for data models.</span>
 
 <span class="sd">    ``Flask-DataTables`` extends the original metadata record from :mod:`peewee`</span>
@@ -82,7 +84,10 @@
     <span class="n">datatables</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Model">
+<a class="viewcode-back" href="../../model.html#flask_datatables.model.Model">[docs]</a>
+<span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">_Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extends :class:`peewee.Model` with `DataTables`_ support.&quot;&quot;&quot;</span>
 
     <span class="nb">id</span><span class="p">:</span> <span class="s1">&#39;AutoField&#39;</span>
@@ -94,7 +99,9 @@
     <span class="c1">#: `DataTables`_ searchable fields.</span>
     <span class="n">dt_searchable</span><span class="p">:</span> <span class="s1">&#39;Dict[str, Field]&#39;</span>
 
-<div class="viewcode-block" id="Model.validate_model"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.validate_model">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Model.validate_model">
+<a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.validate_model">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">validate_model</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validates data model and dynamically insert fields.</span>
 
@@ -138,7 +145,10 @@
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate_model</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Model.save"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="s1">&#39;Optional[List[Field]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Model.save">
+<a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.save">[docs]</a>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_insert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="s1">&#39;Optional[List[Field]]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the data in the model instance.</span>
 
 <span class="sd">        The method extends the original :meth:`peewee.Model.save` method by automatically</span>
@@ -174,7 +184,10 @@
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">force_insert</span><span class="p">,</span> <span class="n">only</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Model.search"><a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.search">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="Model.search">
+<a class="viewcode-back" href="../../model.html#flask_datatables.model.Model.search">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="s1">&#39;Optional[Query]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">factory</span><span class="p">:</span> <span class="s1">&#39;Optional[Factory]&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Response&#39;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Server-side processing integration with `DataTables`_.</span>
@@ -304,7 +317,9 @@
             <span class="s1">&#39;recordsFiltered&#39;</span><span class="p">:</span> <span class="n">records_filtered</span><span class="p">,</span>
             <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
             <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">error_msg</span><span class="p">,</span>
-        <span class="p">}</span></div></div>
+        <span class="p">}</span></div>
+</div>
+
 </pre></div>
 
           </div>
